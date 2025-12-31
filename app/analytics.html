@@ -70,11 +70,21 @@
             <p class="text-sm text-gray-500">Monitor your business performance and growth metrics</p>
           </div>
           <div class="flex items-center gap-3">
-            <div class="flex items-center gap-2 px-3 py-2 bg-gray-100 rounded-lg text-sm text-gray-600">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-              Last 30 days
+            <div class="relative">
+              <button onclick="toggleDatePicker()" class="flex items-center gap-2 px-3 py-2 bg-gray-100 rounded-lg text-sm text-gray-600 hover:bg-gray-200 transition">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                <span id="dateRangeLabel">Last 30 days</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+              </button>
+              <div id="datePickerDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-50">
+                <button onclick="setDateRange('Last 7 days')" class="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50">Last 7 days</button>
+                <button onclick="setDateRange('Last 30 days')" class="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50">Last 30 days</button>
+                <button onclick="setDateRange('Last 90 days')" class="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50">Last 90 days</button>
+                <button onclick="setDateRange('This Year')" class="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50">This Year</button>
+                <button onclick="setDateRange('All Time')" class="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50">All Time</button>
+              </div>
             </div>
-            <button class="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition">
+            <button onclick="exportData()" class="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
               Export
             </button>
@@ -84,50 +94,7 @@
 
       <div class="p-6">
         <!-- Stats Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-          <div class="bg-white rounded-xl border border-gray-200 p-6">
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-10 h-10 bg-fuchsia-50 rounded-lg flex items-center justify-center">
-                <svg class="w-5 h-5 text-fuchsia-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-              </div>
-              <span class="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded-full">+23.1%</span>
-            </div>
-            <div class="text-2xl font-semibold text-gray-900 mb-1">$148,320</div>
-            <div class="text-sm text-gray-500">Total Revenue</div>
-          </div>
-
-          <div class="bg-white rounded-xl border border-gray-200 p-6">
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center">
-                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-              </div>
-              <span class="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded-full">+12.5%</span>
-            </div>
-            <div class="text-2xl font-semibold text-gray-900 mb-1">2,847</div>
-            <div class="text-sm text-gray-500">New Leads</div>
-          </div>
-
-          <div class="bg-white rounded-xl border border-gray-200 p-6">
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-10 h-10 bg-green-50 rounded-lg flex items-center justify-center">
-                <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-              </div>
-              <span class="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded-full">+8.4%</span>
-            </div>
-            <div class="text-2xl font-semibold text-gray-900 mb-1">34.2%</div>
-            <div class="text-sm text-gray-500">Conversion Rate</div>
-          </div>
-
-          <div class="bg-white rounded-xl border border-gray-200 p-6">
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-10 h-10 bg-orange-50 rounded-lg flex items-center justify-center">
-                <svg class="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
-              </div>
-              <span class="text-xs font-medium text-red-600 bg-red-50 px-2 py-1 rounded-full">-2.1%</span>
-            </div>
-            <div class="text-2xl font-semibold text-gray-900 mb-1">$52.40</div>
-            <div class="text-sm text-gray-500">Avg. Deal Size</div>
-          </div>
+        <div id="statsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
         </div>
 
         <!-- Charts Row -->
@@ -136,14 +103,14 @@
           <div class="bg-white rounded-xl border border-gray-200 p-6">
             <div class="flex items-center justify-between mb-6">
               <h3 class="font-semibold text-gray-900">Revenue Over Time</h3>
-              <select class="px-3 py-1.5 border border-gray-200 rounded-lg text-sm text-gray-600">
-                <option>This Month</option>
-                <option>Last 3 Months</option>
-                <option>This Year</option>
+              <select id="revenueChartPeriod" onchange="updateRevenueChart()" class="px-3 py-1.5 border border-gray-200 rounded-lg text-sm text-gray-600">
+                <option value="month">This Month</option>
+                <option value="quarter">Last 3 Months</option>
+                <option value="year">This Year</option>
               </select>
             </div>
-            <div class="h-64">
-              <svg class="w-full h-full" viewBox="0 0 400 160" preserveAspectRatio="none">
+            <div id="revenueChartContainer" class="h-64 relative">
+              <svg id="revenueChart" class="w-full h-full" viewBox="0 0 400 160" preserveAspectRatio="none">
                 <defs>
                   <linearGradient id="revenueGradient" x1="0%" y1="0%" x2="0%" y2="100%">
                     <stop offset="0%" style="stop-color:#c026d3;stop-opacity:0.3"/>
@@ -153,11 +120,12 @@
                 <line x1="0" y1="40" x2="400" y2="40" stroke="#f3f4f6" stroke-width="1"/>
                 <line x1="0" y1="80" x2="400" y2="80" stroke="#f3f4f6" stroke-width="1"/>
                 <line x1="0" y1="120" x2="400" y2="120" stroke="#f3f4f6" stroke-width="1"/>
-                <path d="M 0 140 Q 30 130 60 120 T 120 100 T 180 90 T 240 70 T 300 50 T 360 35 L 400 30 L 400 160 L 0 160 Z" fill="url(#revenueGradient)"/>
-                <path d="M 0 140 Q 30 130 60 120 T 120 100 T 180 90 T 240 70 T 300 50 T 360 35 L 400 30" fill="none" stroke="#c026d3" stroke-width="2"/>
+                <path id="revenueArea" d="M 0 140 Q 30 130 60 120 T 120 100 T 180 90 T 240 70 T 300 50 T 360 35 L 400 30 L 400 160 L 0 160 Z" fill="url(#revenueGradient)"/>
+                <path id="revenueLine" d="M 0 140 Q 30 130 60 120 T 120 100 T 180 90 T 240 70 T 300 50 T 360 35 L 400 30" fill="none" stroke="#c026d3" stroke-width="2"/>
               </svg>
+              <div id="chartTooltip" class="hidden absolute bg-gray-900 text-white text-xs px-2 py-1 rounded pointer-events-none"></div>
             </div>
-            <div class="flex justify-between text-xs text-gray-400 mt-2">
+            <div id="chartLabels" class="flex justify-between text-xs text-gray-400 mt-2">
               <span>Week 1</span>
               <span>Week 2</span>
               <span>Week 3</span>
@@ -168,44 +136,7 @@
           <!-- Lead Sources -->
           <div class="bg-white rounded-xl border border-gray-200 p-6">
             <h3 class="font-semibold text-gray-900 mb-6">Lead Sources</h3>
-            <div class="space-y-4">
-              <div>
-                <div class="flex items-center justify-between text-sm mb-2">
-                  <span class="text-gray-600">Website Forms</span>
-                  <span class="font-medium text-gray-900">42%</span>
-                </div>
-                <div class="h-3 bg-gray-100 rounded-full">
-                  <div class="h-3 bg-fuchsia-500 rounded-full" style="width: 42%"></div>
-                </div>
-              </div>
-              <div>
-                <div class="flex items-center justify-between text-sm mb-2">
-                  <span class="text-gray-600">Email Campaigns</span>
-                  <span class="font-medium text-gray-900">28%</span>
-                </div>
-                <div class="h-3 bg-gray-100 rounded-full">
-                  <div class="h-3 bg-blue-500 rounded-full" style="width: 28%"></div>
-                </div>
-              </div>
-              <div>
-                <div class="flex items-center justify-between text-sm mb-2">
-                  <span class="text-gray-600">Social Media</span>
-                  <span class="font-medium text-gray-900">18%</span>
-                </div>
-                <div class="h-3 bg-gray-100 rounded-full">
-                  <div class="h-3 bg-green-500 rounded-full" style="width: 18%"></div>
-                </div>
-              </div>
-              <div>
-                <div class="flex items-center justify-between text-sm mb-2">
-                  <span class="text-gray-600">Referrals</span>
-                  <span class="font-medium text-gray-900">12%</span>
-                </div>
-                <div class="h-3 bg-gray-100 rounded-full">
-                  <div class="h-3 bg-orange-500 rounded-full" style="width: 12%"></div>
-                </div>
-              </div>
-            </div>
+            <div id="leadSourcesContainer" class="space-y-4"></div>
           </div>
         </div>
 
@@ -213,7 +144,10 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <!-- Top Performing Campaigns -->
           <div class="lg:col-span-2 bg-white rounded-xl border border-gray-200 p-6">
-            <h3 class="font-semibold text-gray-900 mb-4">Top Performing Campaigns</h3>
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-semibold text-gray-900">Top Performing Campaigns</h3>
+              <a href="campaigns.html" class="text-sm text-fuchsia-600 hover:text-fuchsia-700 font-medium">View All</a>
+            </div>
             <table class="w-full">
               <thead>
                 <tr class="text-xs text-gray-500 border-b border-gray-100">
@@ -221,33 +155,10 @@
                   <th class="text-left font-medium pb-3">Leads</th>
                   <th class="text-left font-medium pb-3">Conv. Rate</th>
                   <th class="text-left font-medium pb-3">Revenue</th>
+                  <th class="text-right font-medium pb-3">Actions</th>
                 </tr>
               </thead>
-              <tbody class="text-sm">
-                <tr class="border-b border-gray-50">
-                  <td class="py-3 font-medium text-gray-900">Spring Sale 2025</td>
-                  <td class="py-3 text-gray-600">2,847</td>
-                  <td class="py-3"><span class="text-green-600">42%</span></td>
-                  <td class="py-3 font-medium text-gray-900">$48,320</td>
-                </tr>
-                <tr class="border-b border-gray-50">
-                  <td class="py-3 font-medium text-gray-900">Welcome Series</td>
-                  <td class="py-3 text-gray-600">1,923</td>
-                  <td class="py-3"><span class="text-green-600">38%</span></td>
-                  <td class="py-3 font-medium text-gray-900">$35,200</td>
-                </tr>
-                <tr class="border-b border-gray-50">
-                  <td class="py-3 font-medium text-gray-900">Retargeting Ads</td>
-                  <td class="py-3 text-gray-600">1,456</td>
-                  <td class="py-3"><span class="text-green-600">35%</span></td>
-                  <td class="py-3 font-medium text-gray-900">$28,500</td>
-                </tr>
-                <tr>
-                  <td class="py-3 font-medium text-gray-900">Newsletter Promo</td>
-                  <td class="py-3 text-gray-600">982</td>
-                  <td class="py-3"><span class="text-orange-600">24%</span></td>
-                  <td class="py-3 font-medium text-gray-900">$18,400</td>
-                </tr>
+              <tbody id="campaignsTableBody" class="text-sm">
               </tbody>
             </table>
           </div>
@@ -255,32 +166,412 @@
           <!-- Quick Stats -->
           <div class="bg-white rounded-xl border border-gray-200 p-6">
             <h3 class="font-semibold text-gray-900 mb-4">Quick Stats</h3>
-            <div class="space-y-4">
-              <div class="flex items-center justify-between py-3 border-b border-gray-100">
-                <span class="text-sm text-gray-600">Emails Sent</span>
-                <span class="text-sm font-semibold text-gray-900">156,847</span>
-              </div>
-              <div class="flex items-center justify-between py-3 border-b border-gray-100">
-                <span class="text-sm text-gray-600">SMS Sent</span>
-                <span class="text-sm font-semibold text-gray-900">42,345</span>
-              </div>
-              <div class="flex items-center justify-between py-3 border-b border-gray-100">
-                <span class="text-sm text-gray-600">Appointments</span>
-                <span class="text-sm font-semibold text-gray-900">1,234</span>
-              </div>
-              <div class="flex items-center justify-between py-3 border-b border-gray-100">
-                <span class="text-sm text-gray-600">Deals Closed</span>
-                <span class="text-sm font-semibold text-gray-900">287</span>
-              </div>
-              <div class="flex items-center justify-between py-3">
-                <span class="text-sm text-gray-600">Reviews Collected</span>
-                <span class="text-sm font-semibold text-gray-900">156</span>
-              </div>
-            </div>
+            <div id="quickStatsContainer" class="space-y-4"></div>
           </div>
         </div>
       </div>
     </main>
   </div>
+
+  <!-- Stat Detail Modal -->
+  <div id="statDetailModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+      <div class="p-6 border-b border-gray-100 flex items-center justify-between">
+        <h3 id="statDetailTitle" class="text-lg font-semibold text-gray-900">Stat Details</h3>
+        <button onclick="closeStatDetail()" class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+      </div>
+      <div id="statDetailContent" class="p-6"></div>
+    </div>
+  </div>
+
+  <!-- Campaign Detail Modal -->
+  <div id="campaignDetailModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="p-6 border-b border-gray-100 flex items-center justify-between">
+        <h3 id="campaignDetailTitle" class="text-lg font-semibold text-gray-900">Campaign Details</h3>
+        <button onclick="closeCampaignDetail()" class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+      </div>
+      <div id="campaignDetailContent" class="p-6"></div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="hidden fixed bottom-4 right-4 px-4 py-3 rounded-lg shadow-lg z-50 flex items-center gap-2"></div>
+
+  <script>
+    // Analytics Data
+    const analyticsData = {
+      stats: [
+        { id: 'revenue', title: 'Total Revenue', value: '$148,320', change: '+23.1%', trend: 'up', icon: 'dollar', color: 'fuchsia',
+          details: { breakdown: [
+            { label: 'Product Sales', value: '$98,240' },
+            { label: 'Services', value: '$35,080' },
+            { label: 'Subscriptions', value: '$15,000' }
+          ], history: ['$120,450', '$128,900', '$135,200', '$148,320'] }
+        },
+        { id: 'leads', title: 'New Leads', value: '2,847', change: '+12.5%', trend: 'up', icon: 'users', color: 'blue',
+          details: { breakdown: [
+            { label: 'Website Forms', value: '1,196' },
+            { label: 'Email Campaigns', value: '797' },
+            { label: 'Social Media', value: '512' },
+            { label: 'Referrals', value: '342' }
+          ], history: ['2,120', '2,340', '2,560', '2,847'] }
+        },
+        { id: 'conversion', title: 'Conversion Rate', value: '34.2%', change: '+8.4%', trend: 'up', icon: 'check', color: 'green',
+          details: { breakdown: [
+            { label: 'Lead to Opportunity', value: '48%' },
+            { label: 'Opportunity to Quote', value: '72%' },
+            { label: 'Quote to Close', value: '34.2%' }
+          ], history: ['28.5%', '30.1%', '32.8%', '34.2%'] }
+        },
+        { id: 'dealsize', title: 'Avg. Deal Size', value: '$52.40', change: '-2.1%', trend: 'down', icon: 'trend', color: 'orange',
+          details: { breakdown: [
+            { label: 'Enterprise', value: '$245.00' },
+            { label: 'Business', value: '$89.50' },
+            { label: 'Starter', value: '$29.00' }
+          ], history: ['$54.20', '$53.80', '$52.90', '$52.40'] }
+        }
+      ],
+      leadSources: [
+        { name: 'Website Forms', percentage: 42, color: 'fuchsia' },
+        { name: 'Email Campaigns', percentage: 28, color: 'blue' },
+        { name: 'Social Media', percentage: 18, color: 'green' },
+        { name: 'Referrals', percentage: 12, color: 'orange' }
+      ],
+      campaigns: [
+        { id: 1, name: 'Spring Sale 2025', leads: 2847, convRate: 42, revenue: '$48,320', status: 'Active', started: 'Jan 1, 2025', emails: 45000, clicks: 12340 },
+        { id: 2, name: 'Welcome Series', leads: 1923, convRate: 38, revenue: '$35,200', status: 'Active', started: 'Dec 1, 2024', emails: 32000, clicks: 8920 },
+        { id: 3, name: 'Retargeting Ads', leads: 1456, convRate: 35, revenue: '$28,500', status: 'Active', started: 'Jan 15, 2025', emails: 28000, clicks: 6540 },
+        { id: 4, name: 'Newsletter Promo', leads: 982, convRate: 24, revenue: '$18,400', status: 'Paused', started: 'Feb 1, 2025', emails: 15000, clicks: 3200 }
+      ],
+      quickStats: [
+        { label: 'Emails Sent', value: '156,847' },
+        { label: 'SMS Sent', value: '42,345' },
+        { label: 'Appointments', value: '1,234' },
+        { label: 'Deals Closed', value: '287' },
+        { label: 'Reviews Collected', value: '156' }
+      ],
+      revenueData: {
+        month: { values: [32000, 38000, 35000, 43320], labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'] },
+        quarter: { values: [120000, 135000, 128000, 148320], labels: ['Oct', 'Nov', 'Dec', 'Jan'] },
+        year: { values: [980000, 1050000, 1180000, 1250000], labels: ['Q1', 'Q2', 'Q3', 'Q4'] }
+      }
+    };
+
+    let currentDateRange = 'Last 30 days';
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      renderStats();
+      renderLeadSources();
+      renderCampaignsTable();
+      renderQuickStats();
+      setupChartInteraction();
+    });
+
+    function renderStats() {
+      const container = document.getElementById('statsContainer');
+      const icons = {
+        dollar: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>',
+        users: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>',
+        check: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>',
+        trend: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>'
+      };
+
+      container.innerHTML = analyticsData.stats.map(stat => `
+        <div onclick="showStatDetail('${stat.id}')" class="bg-white rounded-xl border border-gray-200 p-6 cursor-pointer hover:border-fuchsia-300 hover:shadow-sm transition">
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-10 h-10 bg-${stat.color}-50 rounded-lg flex items-center justify-center text-${stat.color}-600">
+              ${icons[stat.icon]}
+            </div>
+            <span class="text-xs font-medium ${stat.trend === 'up' ? 'text-green-600 bg-green-50' : 'text-red-600 bg-red-50'} px-2 py-1 rounded-full">${stat.change}</span>
+          </div>
+          <div class="text-2xl font-semibold text-gray-900 mb-1">${stat.value}</div>
+          <div class="text-sm text-gray-500">${stat.title}</div>
+        </div>
+      `).join('');
+    }
+
+    function renderLeadSources() {
+      const container = document.getElementById('leadSourcesContainer');
+      container.innerHTML = analyticsData.leadSources.map(source => `
+        <div onclick="showLeadSourceDetail('${source.name}')" class="cursor-pointer hover:bg-gray-50 p-2 -mx-2 rounded-lg transition">
+          <div class="flex items-center justify-between text-sm mb-2">
+            <span class="text-gray-600">${source.name}</span>
+            <span class="font-medium text-gray-900">${source.percentage}%</span>
+          </div>
+          <div class="h-3 bg-gray-100 rounded-full overflow-hidden">
+            <div class="h-3 bg-${source.color}-500 rounded-full transition-all duration-500" style="width: ${source.percentage}%"></div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderCampaignsTable() {
+      const tbody = document.getElementById('campaignsTableBody');
+      tbody.innerHTML = analyticsData.campaigns.map(campaign => `
+        <tr class="border-b border-gray-50 hover:bg-gray-50 transition">
+          <td class="py-3 font-medium text-gray-900">${campaign.name}</td>
+          <td class="py-3 text-gray-600">${campaign.leads.toLocaleString()}</td>
+          <td class="py-3"><span class="${campaign.convRate >= 30 ? 'text-green-600' : 'text-orange-600'}">${campaign.convRate}%</span></td>
+          <td class="py-3 font-medium text-gray-900">${campaign.revenue}</td>
+          <td class="py-3 text-right">
+            <button onclick="showCampaignDetail(${campaign.id})" class="text-fuchsia-600 hover:text-fuchsia-700 text-sm font-medium">View Details</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function renderQuickStats() {
+      const container = document.getElementById('quickStatsContainer');
+      container.innerHTML = analyticsData.quickStats.map((stat, index) => `
+        <div class="flex items-center justify-between py-3 ${index < analyticsData.quickStats.length - 1 ? 'border-b border-gray-100' : ''}">
+          <span class="text-sm text-gray-600">${stat.label}</span>
+          <span class="text-sm font-semibold text-gray-900">${stat.value}</span>
+        </div>
+      `).join('');
+    }
+
+    function setupChartInteraction() {
+      const chart = document.getElementById('revenueChartContainer');
+      const tooltip = document.getElementById('chartTooltip');
+
+      chart.addEventListener('mousemove', (e) => {
+        const rect = chart.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const percentage = x / rect.width;
+        const period = document.getElementById('revenueChartPeriod').value;
+        const data = analyticsData.revenueData[period];
+        const index = Math.min(Math.floor(percentage * data.values.length), data.values.length - 1);
+
+        tooltip.textContent = `${data.labels[index]}: $${data.values[index].toLocaleString()}`;
+        tooltip.style.left = `${x}px`;
+        tooltip.style.top = '20px';
+        tooltip.classList.remove('hidden');
+      });
+
+      chart.addEventListener('mouseleave', () => {
+        tooltip.classList.add('hidden');
+      });
+    }
+
+    function updateRevenueChart() {
+      const period = document.getElementById('revenueChartPeriod').value;
+      const data = analyticsData.revenueData[period];
+      const labelsContainer = document.getElementById('chartLabels');
+
+      labelsContainer.innerHTML = data.labels.map(label => `<span>${label}</span>`).join('');
+
+      // Animate chart update
+      const line = document.getElementById('revenueLine');
+      const area = document.getElementById('revenueArea');
+      line.style.opacity = '0';
+      area.style.opacity = '0';
+      setTimeout(() => {
+        line.style.opacity = '1';
+        area.style.opacity = '1';
+      }, 150);
+    }
+
+    function toggleDatePicker() {
+      document.getElementById('datePickerDropdown').classList.toggle('hidden');
+    }
+
+    function setDateRange(range) {
+      currentDateRange = range;
+      document.getElementById('dateRangeLabel').textContent = range;
+      document.getElementById('datePickerDropdown').classList.add('hidden');
+      showToast(`Analytics updated for ${range}`, 'success');
+      // Simulate data refresh
+      renderStats();
+    }
+
+    function exportData() {
+      const csvContent = [
+        ['Metric', 'Value', 'Change'],
+        ...analyticsData.stats.map(s => [s.title, s.value, s.change]),
+        [''],
+        ['Campaign', 'Leads', 'Conversion Rate', 'Revenue'],
+        ...analyticsData.campaigns.map(c => [c.name, c.leads, c.convRate + '%', c.revenue])
+      ].map(row => row.join(',')).join('\n');
+
+      const blob = new Blob([csvContent], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `analytics-${new Date().toISOString().split('T')[0]}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+
+      showToast('Analytics exported successfully', 'success');
+    }
+
+    function showStatDetail(statId) {
+      const stat = analyticsData.stats.find(s => s.id === statId);
+      if (!stat) return;
+
+      document.getElementById('statDetailTitle').textContent = stat.title;
+      document.getElementById('statDetailContent').innerHTML = `
+        <div class="text-center mb-6">
+          <div class="text-4xl font-bold text-gray-900 mb-2">${stat.value}</div>
+          <span class="text-sm font-medium ${stat.trend === 'up' ? 'text-green-600' : 'text-red-600'}">${stat.change} from last period</span>
+        </div>
+        <div class="mb-6">
+          <h4 class="text-sm font-medium text-gray-900 mb-3">Breakdown</h4>
+          <div class="space-y-2">
+            ${stat.details.breakdown.map(item => `
+              <div class="flex items-center justify-between py-2 border-b border-gray-100">
+                <span class="text-sm text-gray-600">${item.label}</span>
+                <span class="text-sm font-medium text-gray-900">${item.value}</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+        <div>
+          <h4 class="text-sm font-medium text-gray-900 mb-3">Historical Trend</h4>
+          <div class="flex items-end justify-between h-24 bg-gray-50 rounded-lg p-3">
+            ${stat.details.history.map((val, i) => `
+              <div class="flex flex-col items-center">
+                <div class="bg-fuchsia-500 rounded-t" style="height: ${20 + i * 15}px; width: 24px;"></div>
+                <span class="text-xs text-gray-500 mt-1">${val}</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+      document.getElementById('statDetailModal').classList.remove('hidden');
+    }
+
+    function closeStatDetail() {
+      document.getElementById('statDetailModal').classList.add('hidden');
+    }
+
+    function showLeadSourceDetail(sourceName) {
+      const source = analyticsData.leadSources.find(s => s.name === sourceName);
+      if (!source) return;
+
+      const leadsCount = Math.round(2847 * (source.percentage / 100));
+      document.getElementById('statDetailTitle').textContent = sourceName;
+      document.getElementById('statDetailContent').innerHTML = `
+        <div class="text-center mb-6">
+          <div class="text-4xl font-bold text-gray-900 mb-2">${source.percentage}%</div>
+          <div class="text-sm text-gray-500">${leadsCount.toLocaleString()} leads this period</div>
+        </div>
+        <div class="space-y-4">
+          <div class="p-4 bg-gray-50 rounded-lg">
+            <div class="text-sm text-gray-600 mb-1">Conversion Rate</div>
+            <div class="text-lg font-semibold text-gray-900">${Math.round(25 + Math.random() * 20)}%</div>
+          </div>
+          <div class="p-4 bg-gray-50 rounded-lg">
+            <div class="text-sm text-gray-600 mb-1">Revenue Generated</div>
+            <div class="text-lg font-semibold text-gray-900">$${Math.round(148320 * (source.percentage / 100)).toLocaleString()}</div>
+          </div>
+          <div class="p-4 bg-gray-50 rounded-lg">
+            <div class="text-sm text-gray-600 mb-1">Avg. Time to Convert</div>
+            <div class="text-lg font-semibold text-gray-900">${Math.round(5 + Math.random() * 10)} days</div>
+          </div>
+        </div>
+      `;
+      document.getElementById('statDetailModal').classList.remove('hidden');
+    }
+
+    function showCampaignDetail(campaignId) {
+      const campaign = analyticsData.campaigns.find(c => c.id === campaignId);
+      if (!campaign) return;
+
+      document.getElementById('campaignDetailTitle').textContent = campaign.name;
+      document.getElementById('campaignDetailContent').innerHTML = `
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <div class="p-4 bg-gray-50 rounded-lg">
+            <div class="text-sm text-gray-600 mb-1">Status</div>
+            <span class="px-2.5 py-1 text-xs font-medium rounded-full ${campaign.status === 'Active' ? 'text-green-700 bg-green-100' : 'text-gray-700 bg-gray-200'}">${campaign.status}</span>
+          </div>
+          <div class="p-4 bg-gray-50 rounded-lg">
+            <div class="text-sm text-gray-600 mb-1">Started</div>
+            <div class="text-lg font-semibold text-gray-900">${campaign.started}</div>
+          </div>
+          <div class="p-4 bg-gray-50 rounded-lg">
+            <div class="text-sm text-gray-600 mb-1">Total Leads</div>
+            <div class="text-lg font-semibold text-gray-900">${campaign.leads.toLocaleString()}</div>
+          </div>
+          <div class="p-4 bg-gray-50 rounded-lg">
+            <div class="text-sm text-gray-600 mb-1">Revenue</div>
+            <div class="text-lg font-semibold text-gray-900">${campaign.revenue}</div>
+          </div>
+        </div>
+
+        <h4 class="text-sm font-medium text-gray-900 mb-3">Performance Metrics</h4>
+        <div class="space-y-4 mb-6">
+          <div>
+            <div class="flex items-center justify-between text-sm mb-2">
+              <span class="text-gray-600">Emails Sent</span>
+              <span class="font-medium text-gray-900">${campaign.emails.toLocaleString()}</span>
+            </div>
+            <div class="h-2 bg-gray-100 rounded-full">
+              <div class="h-2 bg-fuchsia-500 rounded-full" style="width: 100%"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-center justify-between text-sm mb-2">
+              <span class="text-gray-600">Click Rate</span>
+              <span class="font-medium text-gray-900">${((campaign.clicks / campaign.emails) * 100).toFixed(1)}%</span>
+            </div>
+            <div class="h-2 bg-gray-100 rounded-full">
+              <div class="h-2 bg-blue-500 rounded-full" style="width: ${(campaign.clicks / campaign.emails) * 100 * 3}%"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-center justify-between text-sm mb-2">
+              <span class="text-gray-600">Conversion Rate</span>
+              <span class="font-medium text-gray-900">${campaign.convRate}%</span>
+            </div>
+            <div class="h-2 bg-gray-100 rounded-full">
+              <div class="h-2 bg-green-500 rounded-full" style="width: ${campaign.convRate}%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex gap-3">
+          <a href="campaigns.html" class="flex-1 px-4 py-2 text-center text-sm font-medium text-white bg-fuchsia-600 rounded-lg hover:bg-fuchsia-700">Edit Campaign</a>
+          <button onclick="closeCampaignDetail()" class="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-200 rounded-lg hover:bg-gray-50">Close</button>
+        </div>
+      `;
+      document.getElementById('campaignDetailModal').classList.remove('hidden');
+    }
+
+    function closeCampaignDetail() {
+      document.getElementById('campaignDetailModal').classList.add('hidden');
+    }
+
+    function showToast(message, type = 'success') {
+      const toast = document.getElementById('toast');
+      toast.className = `fixed bottom-4 right-4 px-4 py-3 rounded-lg shadow-lg z-50 flex items-center gap-2 ${type === 'success' ? 'bg-green-600 text-white' : 'bg-red-600 text-white'}`;
+      toast.innerHTML = `
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          ${type === 'success'
+            ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>'
+            : '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>'}
+        </svg>
+        <span>${message}</span>
+      `;
+      toast.classList.remove('hidden');
+      setTimeout(() => toast.classList.add('hidden'), 3000);
+    }
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('#datePickerDropdown') && !e.target.closest('[onclick="toggleDatePicker()"]')) {
+        document.getElementById('datePickerDropdown').classList.add('hidden');
+      }
+    });
+
+    // Close modals on escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeStatDetail();
+        closeCampaignDetail();
+      }
+    });
+  </script>
 </body>
 </html>

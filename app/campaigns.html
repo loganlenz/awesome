@@ -20,6 +20,9 @@
   <style>
     .sidebar-link.active { background: rgb(250 232 255); color: rgb(162 28 175); }
     .sidebar-link:hover:not(.active) { background: rgb(243 244 246); }
+    .modal-overlay { backdrop-filter: blur(4px); }
+    .campaign-card { transition: all 0.2s; }
+    .campaign-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
   </style>
 </head>
 <body class="bg-gray-50 font-sans antialiased">
@@ -27,12 +30,12 @@
     <!-- Sidebar -->
     <aside class="w-64 bg-white border-r border-gray-200 flex flex-col">
       <div class="p-4 border-b border-gray-100">
-        <div class="flex items-center gap-2">
+        <a href="../index.html" class="flex items-center gap-2">
           <div class="w-8 h-8 bg-fuchsia-600 rounded-lg flex items-center justify-center">
             <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
           </div>
           <span class="font-semibold text-gray-900">Awesome Software</span>
-        </div>
+        </a>
       </div>
       <div class="p-4 border-b border-gray-100">
         <button class="w-full flex items-center justify-between px-3 py-2 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
@@ -86,10 +89,6 @@
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
           Settings
         </a>
-        <a href="#" class="sidebar-link flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-gray-600 transition">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          Help & Support
-        </a>
       </div>
       <div class="p-4 border-t border-gray-100">
         <div class="flex items-center gap-3">
@@ -114,11 +113,18 @@
             <p class="text-sm text-gray-500">Create and manage your email marketing campaigns</p>
           </div>
           <div class="flex items-center gap-3">
-            <button class="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
-              Import
-            </button>
-            <button class="flex items-center gap-2 px-4 py-2 bg-fuchsia-600 text-white rounded-lg text-sm font-medium hover:bg-fuchsia-700 transition">
+            <div class="relative">
+              <svg class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+              <input type="text" id="searchInput" oninput="searchCampaigns()" placeholder="Search campaigns..." class="pl-10 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500 outline-none w-48">
+            </div>
+            <select id="statusFilter" onchange="filterCampaigns()" class="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-fuchsia-500">
+              <option value="all">All Status</option>
+              <option value="active">Active</option>
+              <option value="scheduled">Scheduled</option>
+              <option value="draft">Draft</option>
+              <option value="completed">Completed</option>
+            </select>
+            <button onclick="openCampaignModal()" class="flex items-center gap-2 px-4 py-2 bg-fuchsia-600 text-white rounded-lg text-sm font-medium hover:bg-fuchsia-700 transition">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
               New Campaign
             </button>
@@ -129,44 +135,44 @@
       <div class="p-6">
         <!-- Stats Cards -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-          <div class="bg-white rounded-xl border border-gray-200 p-5">
+          <div class="bg-white rounded-xl border border-gray-200 p-5 cursor-pointer hover:shadow-md transition" onclick="filterCampaigns('all')">
             <div class="flex items-center justify-between">
               <div>
                 <div class="text-sm text-gray-500 mb-1">Total Sent</div>
-                <div class="text-2xl font-semibold text-gray-900">156,847</div>
+                <div class="text-2xl font-semibold text-gray-900" id="statSent">156,847</div>
               </div>
               <div class="w-10 h-10 bg-fuchsia-50 rounded-lg flex items-center justify-center">
                 <svg class="w-5 h-5 text-fuchsia-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
               </div>
             </div>
           </div>
-          <div class="bg-white rounded-xl border border-gray-200 p-5">
+          <div class="bg-white rounded-xl border border-gray-200 p-5 cursor-pointer hover:shadow-md transition">
             <div class="flex items-center justify-between">
               <div>
                 <div class="text-sm text-gray-500 mb-1">Open Rate</div>
-                <div class="text-2xl font-semibold text-gray-900">42.3%</div>
+                <div class="text-2xl font-semibold text-gray-900" id="statOpen">42.3%</div>
               </div>
               <div class="w-10 h-10 bg-green-50 rounded-lg flex items-center justify-center">
                 <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
               </div>
             </div>
           </div>
-          <div class="bg-white rounded-xl border border-gray-200 p-5">
+          <div class="bg-white rounded-xl border border-gray-200 p-5 cursor-pointer hover:shadow-md transition">
             <div class="flex items-center justify-between">
               <div>
                 <div class="text-sm text-gray-500 mb-1">Click Rate</div>
-                <div class="text-2xl font-semibold text-gray-900">12.8%</div>
+                <div class="text-2xl font-semibold text-gray-900" id="statClick">12.8%</div>
               </div>
               <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center">
                 <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/></svg>
               </div>
             </div>
           </div>
-          <div class="bg-white rounded-xl border border-gray-200 p-5">
+          <div class="bg-white rounded-xl border border-gray-200 p-5 cursor-pointer hover:shadow-md transition">
             <div class="flex items-center justify-between">
               <div>
                 <div class="text-sm text-gray-500 mb-1">Conversions</div>
-                <div class="text-2xl font-semibold text-gray-900">2,847</div>
+                <div class="text-2xl font-semibold text-gray-900" id="statConversions">2,847</div>
               </div>
               <div class="w-10 h-10 bg-orange-50 rounded-lg flex items-center justify-center">
                 <svg class="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
@@ -176,163 +182,400 @@
         </div>
 
         <!-- Campaigns Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <!-- Campaign Card 1 -->
-          <div class="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-md transition">
-            <div class="h-32 bg-gradient-to-br from-fuchsia-500 to-purple-600 p-4 flex items-end">
-              <span class="px-2 py-1 text-xs font-medium text-white bg-white/20 rounded-full backdrop-blur-sm">Active</span>
-            </div>
-            <div class="p-5">
-              <h3 class="font-semibold text-gray-900 mb-1">Spring Sale 2025</h3>
-              <p class="text-sm text-gray-500 mb-4">Seasonal promotion campaign targeting existing customers</p>
-              <div class="grid grid-cols-3 gap-4 text-center mb-4">
-                <div>
-                  <div class="text-lg font-semibold text-gray-900">2,847</div>
-                  <div class="text-xs text-gray-500">Sent</div>
-                </div>
-                <div>
-                  <div class="text-lg font-semibold text-gray-900">42%</div>
-                  <div class="text-xs text-gray-500">Opened</div>
-                </div>
-                <div>
-                  <div class="text-lg font-semibold text-gray-900">15%</div>
-                  <div class="text-xs text-gray-500">Clicked</div>
-                </div>
-              </div>
-              <div class="flex items-center gap-2">
-                <button class="flex-1 px-3 py-2 text-sm font-medium text-gray-700 border border-gray-200 rounded-lg hover:bg-gray-50">Edit</button>
-                <button class="flex-1 px-3 py-2 text-sm font-medium text-white bg-fuchsia-600 rounded-lg hover:bg-fuchsia-700">View Report</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Campaign Card 2 -->
-          <div class="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-md transition">
-            <div class="h-32 bg-gradient-to-br from-blue-500 to-cyan-600 p-4 flex items-end">
-              <span class="px-2 py-1 text-xs font-medium text-white bg-white/20 rounded-full backdrop-blur-sm">Active</span>
-            </div>
-            <div class="p-5">
-              <h3 class="font-semibold text-gray-900 mb-1">Welcome Series</h3>
-              <p class="text-sm text-gray-500 mb-4">Automated onboarding sequence for new subscribers</p>
-              <div class="grid grid-cols-3 gap-4 text-center mb-4">
-                <div>
-                  <div class="text-lg font-semibold text-gray-900">1,923</div>
-                  <div class="text-xs text-gray-500">Sent</div>
-                </div>
-                <div>
-                  <div class="text-lg font-semibold text-gray-900">58%</div>
-                  <div class="text-xs text-gray-500">Opened</div>
-                </div>
-                <div>
-                  <div class="text-lg font-semibold text-gray-900">22%</div>
-                  <div class="text-xs text-gray-500">Clicked</div>
-                </div>
-              </div>
-              <div class="flex items-center gap-2">
-                <button class="flex-1 px-3 py-2 text-sm font-medium text-gray-700 border border-gray-200 rounded-lg hover:bg-gray-50">Edit</button>
-                <button class="flex-1 px-3 py-2 text-sm font-medium text-white bg-fuchsia-600 rounded-lg hover:bg-fuchsia-700">View Report</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Campaign Card 3 -->
-          <div class="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-md transition">
-            <div class="h-32 bg-gradient-to-br from-green-500 to-emerald-600 p-4 flex items-end">
-              <span class="px-2 py-1 text-xs font-medium text-white bg-white/20 rounded-full backdrop-blur-sm">Scheduled</span>
-            </div>
-            <div class="p-5">
-              <h3 class="font-semibold text-gray-900 mb-1">Product Launch</h3>
-              <p class="text-sm text-gray-500 mb-4">Announcement for new feature release next week</p>
-              <div class="grid grid-cols-3 gap-4 text-center mb-4">
-                <div>
-                  <div class="text-lg font-semibold text-gray-900">5,200</div>
-                  <div class="text-xs text-gray-500">Target</div>
-                </div>
-                <div>
-                  <div class="text-lg font-semibold text-gray-900">Jan 15</div>
-                  <div class="text-xs text-gray-500">Schedule</div>
-                </div>
-                <div>
-                  <div class="text-lg font-semibold text-gray-900">9:00 AM</div>
-                  <div class="text-xs text-gray-500">Time</div>
-                </div>
-              </div>
-              <div class="flex items-center gap-2">
-                <button class="flex-1 px-3 py-2 text-sm font-medium text-gray-700 border border-gray-200 rounded-lg hover:bg-gray-50">Edit</button>
-                <button class="flex-1 px-3 py-2 text-sm font-medium text-white bg-fuchsia-600 rounded-lg hover:bg-fuchsia-700">Preview</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Campaign Card 4 -->
-          <div class="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-md transition">
-            <div class="h-32 bg-gradient-to-br from-orange-500 to-red-600 p-4 flex items-end">
-              <span class="px-2 py-1 text-xs font-medium text-gray-600 bg-gray-100 rounded-full">Completed</span>
-            </div>
-            <div class="p-5">
-              <h3 class="font-semibold text-gray-900 mb-1">Holiday Special</h3>
-              <p class="text-sm text-gray-500 mb-4">Year-end promotion with exclusive discounts</p>
-              <div class="grid grid-cols-3 gap-4 text-center mb-4">
-                <div>
-                  <div class="text-lg font-semibold text-gray-900">8,456</div>
-                  <div class="text-xs text-gray-500">Sent</div>
-                </div>
-                <div>
-                  <div class="text-lg font-semibold text-gray-900">38%</div>
-                  <div class="text-xs text-gray-500">Opened</div>
-                </div>
-                <div>
-                  <div class="text-lg font-semibold text-gray-900">$12.4K</div>
-                  <div class="text-xs text-gray-500">Revenue</div>
-                </div>
-              </div>
-              <div class="flex items-center gap-2">
-                <button class="flex-1 px-3 py-2 text-sm font-medium text-gray-700 border border-gray-200 rounded-lg hover:bg-gray-50">Duplicate</button>
-                <button class="flex-1 px-3 py-2 text-sm font-medium text-white bg-fuchsia-600 rounded-lg hover:bg-fuchsia-700">View Report</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Campaign Card 5 -->
-          <div class="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-md transition">
-            <div class="h-32 bg-gradient-to-br from-indigo-500 to-violet-600 p-4 flex items-end">
-              <span class="px-2 py-1 text-xs font-medium text-gray-600 bg-gray-100 rounded-full">Draft</span>
-            </div>
-            <div class="p-5">
-              <h3 class="font-semibold text-gray-900 mb-1">Re-engagement Campaign</h3>
-              <p class="text-sm text-gray-500 mb-4">Win back inactive subscribers with special offer</p>
-              <div class="grid grid-cols-3 gap-4 text-center mb-4">
-                <div>
-                  <div class="text-lg font-semibold text-gray-900">1,234</div>
-                  <div class="text-xs text-gray-500">Target</div>
-                </div>
-                <div>
-                  <div class="text-lg font-semibold text-gray-900">-</div>
-                  <div class="text-xs text-gray-500">Schedule</div>
-                </div>
-                <div>
-                  <div class="text-lg font-semibold text-gray-900">50%</div>
-                  <div class="text-xs text-gray-500">Complete</div>
-                </div>
-              </div>
-              <div class="flex items-center gap-2">
-                <button class="flex-1 px-3 py-2 text-sm font-medium text-gray-700 border border-gray-200 rounded-lg hover:bg-gray-50">Delete</button>
-                <button class="flex-1 px-3 py-2 text-sm font-medium text-white bg-fuchsia-600 rounded-lg hover:bg-fuchsia-700">Continue</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Create New Campaign Card -->
-          <div class="bg-gray-50 rounded-xl border-2 border-dashed border-gray-200 p-5 flex flex-col items-center justify-center min-h-[320px] hover:border-fuchsia-300 hover:bg-fuchsia-50/50 transition cursor-pointer">
-            <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 shadow-sm">
-              <svg class="w-6 h-6 text-fuchsia-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-            </div>
-            <h3 class="font-medium text-gray-900 mb-1">Create New Campaign</h3>
-            <p class="text-sm text-gray-500 text-center">Start from scratch or use a template</p>
-          </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="campaignsGrid">
+          <!-- Campaigns will be rendered here -->
         </div>
       </div>
     </main>
   </div>
+
+  <!-- Campaign Modal -->
+  <div id="campaignModal" class="fixed inset-0 z-50 hidden">
+    <div class="modal-overlay absolute inset-0 bg-black/50" onclick="closeCampaignModal()"></div>
+    <div class="absolute inset-0 flex items-center justify-center p-4">
+      <div class="bg-white rounded-2xl shadow-xl w-full max-w-lg relative max-h-[90vh] overflow-y-auto">
+        <div class="flex items-center justify-between p-6 border-b border-gray-100">
+          <h2 class="text-lg font-semibold text-gray-900" id="modalTitle">New Campaign</h2>
+          <button onclick="closeCampaignModal()" class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+        <form onsubmit="saveCampaign(event)" class="p-6 space-y-4">
+          <input type="hidden" id="editCampaignId">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Campaign Name</label>
+            <input type="text" id="campaignName" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+            <textarea id="campaignDescription" rows="2" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500"></textarea>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Subject Line</label>
+            <input type="text" id="campaignSubject" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500">
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Type</label>
+              <select id="campaignType" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500">
+                <option value="email">Email</option>
+                <option value="sms">SMS</option>
+                <option value="both">Email + SMS</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+              <select id="campaignStatus" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500">
+                <option value="draft">Draft</option>
+                <option value="scheduled">Scheduled</option>
+                <option value="active">Active</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Target Audience</label>
+            <select id="campaignAudience" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500">
+              <option value="all">All Contacts</option>
+              <option value="new">New Leads</option>
+              <option value="active">Active Customers</option>
+              <option value="inactive">Inactive (90+ days)</option>
+            </select>
+          </div>
+          <div id="scheduleSection">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Schedule Date</label>
+            <input type="datetime-local" id="campaignSchedule" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Color Theme</label>
+            <div class="flex gap-2">
+              <button type="button" onclick="selectColor('fuchsia')" class="w-8 h-8 rounded-full bg-gradient-to-br from-fuchsia-500 to-purple-600 color-btn" data-color="fuchsia"></button>
+              <button type="button" onclick="selectColor('blue')" class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-cyan-600 color-btn" data-color="blue"></button>
+              <button type="button" onclick="selectColor('green')" class="w-8 h-8 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 color-btn" data-color="green"></button>
+              <button type="button" onclick="selectColor('orange')" class="w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 to-red-600 color-btn" data-color="orange"></button>
+              <button type="button" onclick="selectColor('indigo')" class="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 color-btn" data-color="indigo"></button>
+            </div>
+            <input type="hidden" id="campaignColor" value="fuchsia">
+          </div>
+          <div class="flex gap-3 pt-4">
+            <button type="button" onclick="closeCampaignModal()" class="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium">Cancel</button>
+            <button type="submit" class="flex-1 px-4 py-2 bg-fuchsia-600 text-white rounded-lg hover:bg-fuchsia-700 font-medium">Save Campaign</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Report Modal -->
+  <div id="reportModal" class="fixed inset-0 z-50 hidden">
+    <div class="modal-overlay absolute inset-0 bg-black/50" onclick="closeReportModal()"></div>
+    <div class="absolute inset-0 flex items-center justify-center p-4">
+      <div class="bg-white rounded-2xl shadow-xl w-full max-w-2xl relative">
+        <div class="flex items-center justify-between p-6 border-b border-gray-100">
+          <h2 class="text-lg font-semibold text-gray-900" id="reportTitle">Campaign Report</h2>
+          <button onclick="closeReportModal()" class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+        <div class="p-6" id="reportContent">
+          <!-- Report content will be rendered here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="fixed bottom-4 right-4 bg-gray-900 text-white px-4 py-3 rounded-lg shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 z-50">
+    <div class="flex items-center gap-3">
+      <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+      <span id="toastMessage">Success!</span>
+    </div>
+  </div>
+
+  <script>
+    let campaigns = [
+      { id: 1, name: 'Spring Sale 2025', description: 'Seasonal promotion targeting existing customers', subject: 'Spring into savings!', type: 'email', status: 'active', audience: 'all', color: 'fuchsia', sent: 2847, opened: 42, clicked: 15 },
+      { id: 2, name: 'Welcome Series', description: 'Automated onboarding for new subscribers', subject: 'Welcome to our community!', type: 'email', status: 'active', audience: 'new', color: 'blue', sent: 1923, opened: 58, clicked: 22 },
+      { id: 3, name: 'Product Launch', description: 'Announcement for new feature release', subject: 'Introducing our new features', type: 'email', status: 'scheduled', audience: 'active', schedule: '2025-01-15T09:00', color: 'green', sent: 0, opened: 0, clicked: 0, target: 5200 },
+      { id: 4, name: 'Holiday Special', description: 'Year-end promotion with exclusive discounts', subject: 'Holiday deals inside!', type: 'email', status: 'completed', audience: 'all', color: 'orange', sent: 8456, opened: 38, clicked: 12, revenue: 12400 },
+      { id: 5, name: 'Re-engagement Campaign', description: 'Win back inactive subscribers', subject: 'We miss you!', type: 'email', status: 'draft', audience: 'inactive', color: 'indigo', sent: 0, opened: 0, clicked: 0, target: 1234 }
+    ];
+
+    let selectedColor = 'fuchsia';
+
+    document.addEventListener('DOMContentLoaded', renderCampaigns);
+
+    function renderCampaigns(filteredData = null) {
+      const grid = document.getElementById('campaignsGrid');
+      const data = filteredData || campaigns;
+
+      const gradients = {
+        fuchsia: 'from-fuchsia-500 to-purple-600',
+        blue: 'from-blue-500 to-cyan-600',
+        green: 'from-green-500 to-emerald-600',
+        orange: 'from-orange-500 to-red-600',
+        indigo: 'from-indigo-500 to-violet-600'
+      };
+
+      const statusBadges = {
+        active: '<span class="px-2 py-1 text-xs font-medium text-white bg-white/20 rounded-full backdrop-blur-sm">Active</span>',
+        scheduled: '<span class="px-2 py-1 text-xs font-medium text-white bg-white/20 rounded-full backdrop-blur-sm">Scheduled</span>',
+        draft: '<span class="px-2 py-1 text-xs font-medium text-gray-600 bg-gray-100 rounded-full">Draft</span>',
+        completed: '<span class="px-2 py-1 text-xs font-medium text-gray-600 bg-gray-100 rounded-full">Completed</span>'
+      };
+
+      let html = data.map(c => `
+        <div class="campaign-card bg-white rounded-xl border border-gray-200 overflow-hidden">
+          <div class="h-32 bg-gradient-to-br ${gradients[c.color]} p-4 flex items-end">
+            ${statusBadges[c.status]}
+          </div>
+          <div class="p-5">
+            <h3 class="font-semibold text-gray-900 mb-1">${c.name}</h3>
+            <p class="text-sm text-gray-500 mb-4">${c.description}</p>
+            <div class="grid grid-cols-3 gap-4 text-center mb-4">
+              ${c.status === 'draft' || c.status === 'scheduled' ? `
+                <div>
+                  <div class="text-lg font-semibold text-gray-900">${c.target?.toLocaleString() || '-'}</div>
+                  <div class="text-xs text-gray-500">Target</div>
+                </div>
+                <div>
+                  <div class="text-lg font-semibold text-gray-900">${c.schedule ? new Date(c.schedule).toLocaleDateString('en-US', {month: 'short', day: 'numeric'}) : '-'}</div>
+                  <div class="text-xs text-gray-500">Schedule</div>
+                </div>
+                <div>
+                  <div class="text-lg font-semibold text-gray-900">${c.status === 'draft' ? '50%' : '-'}</div>
+                  <div class="text-xs text-gray-500">${c.status === 'draft' ? 'Complete' : 'Time'}</div>
+                </div>
+              ` : `
+                <div>
+                  <div class="text-lg font-semibold text-gray-900">${c.sent.toLocaleString()}</div>
+                  <div class="text-xs text-gray-500">Sent</div>
+                </div>
+                <div>
+                  <div class="text-lg font-semibold text-gray-900">${c.opened}%</div>
+                  <div class="text-xs text-gray-500">Opened</div>
+                </div>
+                <div>
+                  <div class="text-lg font-semibold text-gray-900">${c.revenue ? '$' + (c.revenue/1000).toFixed(1) + 'K' : c.clicked + '%'}</div>
+                  <div class="text-xs text-gray-500">${c.revenue ? 'Revenue' : 'Clicked'}</div>
+                </div>
+              `}
+            </div>
+            <div class="flex items-center gap-2">
+              ${c.status === 'completed' ? `
+                <button onclick="duplicateCampaign(${c.id})" class="flex-1 px-3 py-2 text-sm font-medium text-gray-700 border border-gray-200 rounded-lg hover:bg-gray-50">Duplicate</button>
+              ` : c.status === 'draft' ? `
+                <button onclick="deleteCampaign(${c.id})" class="flex-1 px-3 py-2 text-sm font-medium text-red-600 border border-red-200 rounded-lg hover:bg-red-50">Delete</button>
+              ` : `
+                <button onclick="editCampaign(${c.id})" class="flex-1 px-3 py-2 text-sm font-medium text-gray-700 border border-gray-200 rounded-lg hover:bg-gray-50">Edit</button>
+              `}
+              ${c.status === 'draft' ? `
+                <button onclick="editCampaign(${c.id})" class="flex-1 px-3 py-2 text-sm font-medium text-white bg-fuchsia-600 rounded-lg hover:bg-fuchsia-700">Continue</button>
+              ` : c.status === 'scheduled' ? `
+                <button onclick="previewCampaign(${c.id})" class="flex-1 px-3 py-2 text-sm font-medium text-white bg-fuchsia-600 rounded-lg hover:bg-fuchsia-700">Preview</button>
+              ` : `
+                <button onclick="viewReport(${c.id})" class="flex-1 px-3 py-2 text-sm font-medium text-white bg-fuchsia-600 rounded-lg hover:bg-fuchsia-700">View Report</button>
+              `}
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      // Add create new card
+      html += `
+        <div onclick="openCampaignModal()" class="bg-gray-50 rounded-xl border-2 border-dashed border-gray-200 p-5 flex flex-col items-center justify-center min-h-[320px] hover:border-fuchsia-300 hover:bg-fuchsia-50/50 transition cursor-pointer">
+          <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 shadow-sm">
+            <svg class="w-6 h-6 text-fuchsia-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+          </div>
+          <h3 class="font-medium text-gray-900 mb-1">Create New Campaign</h3>
+          <p class="text-sm text-gray-500 text-center">Start from scratch or use a template</p>
+        </div>
+      `;
+
+      grid.innerHTML = html;
+    }
+
+    function searchCampaigns() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      const filtered = campaigns.filter(c =>
+        c.name.toLowerCase().includes(query) ||
+        c.description.toLowerCase().includes(query)
+      );
+      renderCampaigns(filtered);
+    }
+
+    function filterCampaigns(status) {
+      if (typeof status === 'string' && status !== 'all') {
+        document.getElementById('statusFilter').value = status;
+      }
+      const filterValue = document.getElementById('statusFilter').value;
+      if (filterValue === 'all') {
+        renderCampaigns();
+      } else {
+        const filtered = campaigns.filter(c => c.status === filterValue);
+        renderCampaigns(filtered);
+      }
+    }
+
+    function openCampaignModal() {
+      document.getElementById('modalTitle').textContent = 'New Campaign';
+      document.getElementById('editCampaignId').value = '';
+      document.getElementById('campaignName').value = '';
+      document.getElementById('campaignDescription').value = '';
+      document.getElementById('campaignSubject').value = '';
+      document.getElementById('campaignType').value = 'email';
+      document.getElementById('campaignStatus').value = 'draft';
+      document.getElementById('campaignAudience').value = 'all';
+      document.getElementById('campaignSchedule').value = '';
+      selectColor('fuchsia');
+      document.getElementById('campaignModal').classList.remove('hidden');
+    }
+
+    function editCampaign(id) {
+      const campaign = campaigns.find(c => c.id === id);
+      if (!campaign) return;
+
+      document.getElementById('modalTitle').textContent = 'Edit Campaign';
+      document.getElementById('editCampaignId').value = id;
+      document.getElementById('campaignName').value = campaign.name;
+      document.getElementById('campaignDescription').value = campaign.description;
+      document.getElementById('campaignSubject').value = campaign.subject;
+      document.getElementById('campaignType').value = campaign.type;
+      document.getElementById('campaignStatus').value = campaign.status;
+      document.getElementById('campaignAudience').value = campaign.audience;
+      document.getElementById('campaignSchedule').value = campaign.schedule || '';
+      selectColor(campaign.color);
+      document.getElementById('campaignModal').classList.remove('hidden');
+    }
+
+    function closeCampaignModal() {
+      document.getElementById('campaignModal').classList.add('hidden');
+    }
+
+    function selectColor(color) {
+      selectedColor = color;
+      document.getElementById('campaignColor').value = color;
+      document.querySelectorAll('.color-btn').forEach(btn => {
+        btn.classList.remove('ring-2', 'ring-offset-2', 'ring-gray-400');
+        if (btn.dataset.color === color) {
+          btn.classList.add('ring-2', 'ring-offset-2', 'ring-gray-400');
+        }
+      });
+    }
+
+    function saveCampaign(e) {
+      e.preventDefault();
+      const id = document.getElementById('editCampaignId').value;
+      const name = document.getElementById('campaignName').value;
+      const description = document.getElementById('campaignDescription').value;
+      const subject = document.getElementById('campaignSubject').value;
+      const type = document.getElementById('campaignType').value;
+      const status = document.getElementById('campaignStatus').value;
+      const audience = document.getElementById('campaignAudience').value;
+      const schedule = document.getElementById('campaignSchedule').value;
+      const color = document.getElementById('campaignColor').value;
+
+      if (id) {
+        const campaign = campaigns.find(c => c.id === parseInt(id));
+        if (campaign) {
+          Object.assign(campaign, { name, description, subject, type, status, audience, schedule, color });
+          showToast('Campaign updated');
+        }
+      } else {
+        const newCampaign = {
+          id: Date.now(),
+          name, description, subject, type, status, audience, schedule, color,
+          sent: 0, opened: 0, clicked: 0, target: Math.floor(Math.random() * 5000) + 1000
+        };
+        campaigns.unshift(newCampaign);
+        showToast('Campaign created');
+      }
+
+      closeCampaignModal();
+      renderCampaigns();
+    }
+
+    function duplicateCampaign(id) {
+      const campaign = campaigns.find(c => c.id === id);
+      if (!campaign) return;
+
+      const duplicate = {
+        ...campaign,
+        id: Date.now(),
+        name: campaign.name + ' (Copy)',
+        status: 'draft',
+        sent: 0, opened: 0, clicked: 0
+      };
+      campaigns.unshift(duplicate);
+      renderCampaigns();
+      showToast('Campaign duplicated');
+    }
+
+    function deleteCampaign(id) {
+      if (confirm('Delete this campaign?')) {
+        campaigns = campaigns.filter(c => c.id !== id);
+        renderCampaigns();
+        showToast('Campaign deleted');
+      }
+    }
+
+    function previewCampaign(id) {
+      const campaign = campaigns.find(c => c.id === id);
+      showToast(`Previewing: ${campaign?.name}`);
+    }
+
+    function viewReport(id) {
+      const campaign = campaigns.find(c => c.id === id);
+      if (!campaign) return;
+
+      document.getElementById('reportTitle').textContent = campaign.name + ' - Report';
+      document.getElementById('reportContent').innerHTML = `
+        <div class="grid grid-cols-4 gap-4 mb-6">
+          <div class="text-center p-4 bg-gray-50 rounded-lg">
+            <div class="text-2xl font-bold text-gray-900">${campaign.sent.toLocaleString()}</div>
+            <div class="text-sm text-gray-500">Emails Sent</div>
+          </div>
+          <div class="text-center p-4 bg-gray-50 rounded-lg">
+            <div class="text-2xl font-bold text-green-600">${campaign.opened}%</div>
+            <div class="text-sm text-gray-500">Open Rate</div>
+          </div>
+          <div class="text-center p-4 bg-gray-50 rounded-lg">
+            <div class="text-2xl font-bold text-blue-600">${campaign.clicked}%</div>
+            <div class="text-sm text-gray-500">Click Rate</div>
+          </div>
+          <div class="text-center p-4 bg-gray-50 rounded-lg">
+            <div class="text-2xl font-bold text-fuchsia-600">${campaign.revenue ? '$' + campaign.revenue.toLocaleString() : Math.floor(campaign.sent * campaign.opened / 100 * 0.1)}</div>
+            <div class="text-sm text-gray-500">${campaign.revenue ? 'Revenue' : 'Conversions'}</div>
+          </div>
+        </div>
+        <div class="bg-gray-50 rounded-lg p-4 mb-4">
+          <h4 class="font-medium text-gray-900 mb-2">Subject Line</h4>
+          <p class="text-gray-600">${campaign.subject}</p>
+        </div>
+        <div class="flex gap-3">
+          <button onclick="closeReportModal()" class="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium">Close</button>
+          <button onclick="showToast('Report exported')" class="flex-1 px-4 py-2 bg-fuchsia-600 text-white rounded-lg hover:bg-fuchsia-700 font-medium">Export PDF</button>
+        </div>
+      `;
+      document.getElementById('reportModal').classList.remove('hidden');
+    }
+
+    function closeReportModal() {
+      document.getElementById('reportModal').classList.add('hidden');
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toastMessage').textContent = message;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      setTimeout(() => toast.classList.add('translate-y-20', 'opacity-0'), 3000);
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeCampaignModal();
+        closeReportModal();
+      }
+    });
+  </script>
 </body>
 </html>
