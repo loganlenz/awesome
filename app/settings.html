@@ -52,10 +52,10 @@
       </div>
       <div class="p-4 border-t border-gray-100">
         <div class="flex items-center gap-3">
-          <div class="w-9 h-9 bg-fuchsia-100 rounded-full flex items-center justify-center text-fuchsia-600 font-medium text-sm">JD</div>
+          <div id="sidebarAvatar" class="w-9 h-9 bg-fuchsia-100 rounded-full flex items-center justify-center text-fuchsia-600 font-medium text-sm">JD</div>
           <div class="flex-1 min-w-0">
-            <div class="text-sm font-medium text-gray-900 truncate">John Doe</div>
-            <div class="text-xs text-gray-500 truncate">john@acmecorp.com</div>
+            <div id="sidebarName" class="text-sm font-medium text-gray-900 truncate">John Doe</div>
+            <div id="sidebarEmail" class="text-xs text-gray-500 truncate">john@acmecorp.com</div>
           </div>
           <a href="../login.html" class="p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg></a>
         </div>
@@ -74,28 +74,28 @@
           <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
             <h3 class="font-semibold text-gray-900 mb-4">Profile</h3>
             <div class="flex items-start gap-6 mb-6">
-              <div class="w-20 h-20 bg-fuchsia-100 rounded-full flex items-center justify-center text-fuchsia-600 font-semibold text-2xl">JD</div>
+              <div id="profileAvatar" class="w-20 h-20 bg-fuchsia-100 rounded-full flex items-center justify-center text-fuchsia-600 font-semibold text-2xl">JD</div>
               <div>
-                <button class="px-4 py-2 text-sm font-medium text-fuchsia-600 border border-fuchsia-200 rounded-lg hover:bg-fuchsia-50 mb-2">Change Photo</button>
+                <button onclick="openPhotoModal()" class="px-4 py-2 text-sm font-medium text-fuchsia-600 border border-fuchsia-200 rounded-lg hover:bg-fuchsia-50 mb-2">Change Photo</button>
                 <p class="text-xs text-gray-500">JPG, GIF or PNG. Max size 2MB</p>
               </div>
             </div>
             <div class="grid grid-cols-2 gap-4">
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1.5">First Name</label>
-                <input type="text" value="John" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500 outline-none">
+                <input type="text" id="firstName" value="John" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500 outline-none">
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1.5">Last Name</label>
-                <input type="text" value="Doe" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500 outline-none">
+                <input type="text" id="lastName" value="Doe" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500 outline-none">
               </div>
               <div class="col-span-2">
                 <label class="block text-sm font-medium text-gray-700 mb-1.5">Email</label>
-                <input type="email" value="john@acmecorp.com" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500 outline-none">
+                <input type="email" id="email" value="john@acmecorp.com" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500 outline-none">
               </div>
               <div class="col-span-2">
                 <label class="block text-sm font-medium text-gray-700 mb-1.5">Phone</label>
-                <input type="tel" value="(555) 123-4567" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500 outline-none">
+                <input type="tel" id="phone" value="(555) 123-4567" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500 outline-none">
               </div>
             </div>
           </div>
@@ -106,15 +106,15 @@
             <div class="space-y-4">
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1.5">Company Name</label>
-                <input type="text" value="Acme Corp" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500 outline-none">
+                <input type="text" id="companyName" value="Acme Corp" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500 outline-none">
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1.5">Website</label>
-                <input type="url" value="https://acmecorp.com" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500 outline-none">
+                <input type="url" id="website" value="https://acmecorp.com" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500 outline-none">
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1.5">Industry</label>
-                <select class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500 outline-none">
+                <select id="industry" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500 outline-none">
                   <option>Marketing Agency</option>
                   <option>Real Estate</option>
                   <option>Healthcare</option>
@@ -129,22 +129,22 @@
           <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
             <div class="flex items-center justify-between mb-4">
               <h3 class="font-semibold text-gray-900">Billing</h3>
-              <span class="px-3 py-1 text-xs font-medium text-fuchsia-700 bg-fuchsia-50 rounded-full">Professional Plan</span>
+              <span id="planBadge" class="px-3 py-1 text-xs font-medium text-fuchsia-700 bg-fuchsia-50 rounded-full">Professional Plan</span>
             </div>
             <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg mb-4">
               <div>
-                <div class="font-medium text-gray-900">$297/month</div>
+                <div id="planPrice" class="font-medium text-gray-900">$297/month</div>
                 <div class="text-sm text-gray-500">Next billing date: Feb 1, 2025</div>
               </div>
-              <button class="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-200 rounded-lg hover:bg-white">Change Plan</button>
+              <button onclick="openPlanModal()" class="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-200 rounded-lg hover:bg-white">Change Plan</button>
             </div>
             <div class="flex items-center gap-3 p-4 border border-gray-200 rounded-lg">
               <div class="w-10 h-6 bg-gradient-to-r from-blue-600 to-blue-800 rounded flex items-center justify-center text-white text-xs">VISA</div>
               <div class="flex-1">
-                <div class="text-sm font-medium text-gray-900">Visa ending in 4242</div>
+                <div id="cardInfo" class="text-sm font-medium text-gray-900">Visa ending in 4242</div>
                 <div class="text-xs text-gray-500">Expires 12/26</div>
               </div>
-              <button class="text-sm text-fuchsia-600 hover:text-fuchsia-700 font-medium">Update</button>
+              <button onclick="openPaymentModal()" class="text-sm text-fuchsia-600 hover:text-fuchsia-700 font-medium">Update</button>
             </div>
           </div>
 
@@ -157,8 +157,8 @@
                   <div class="text-sm font-medium text-gray-900">Email Notifications</div>
                   <div class="text-xs text-gray-500">Receive email updates about your account</div>
                 </div>
-                <button class="w-11 h-6 bg-fuchsia-600 rounded-full relative">
-                  <span class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full"></span>
+                <button onclick="toggleSwitch('emailNotif')" id="emailNotif" class="w-11 h-6 bg-fuchsia-600 rounded-full relative transition-colors">
+                  <span class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full transition-all"></span>
                 </button>
               </div>
               <div class="flex items-center justify-between">
@@ -166,8 +166,8 @@
                   <div class="text-sm font-medium text-gray-900">SMS Notifications</div>
                   <div class="text-xs text-gray-500">Get text messages for important alerts</div>
                 </div>
-                <button class="w-11 h-6 bg-fuchsia-600 rounded-full relative">
-                  <span class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full"></span>
+                <button onclick="toggleSwitch('smsNotif')" id="smsNotif" class="w-11 h-6 bg-fuchsia-600 rounded-full relative transition-colors">
+                  <span class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full transition-all"></span>
                 </button>
               </div>
               <div class="flex items-center justify-between">
@@ -175,8 +175,31 @@
                   <div class="text-sm font-medium text-gray-900">Weekly Reports</div>
                   <div class="text-xs text-gray-500">Receive weekly performance summaries</div>
                 </div>
-                <button class="w-11 h-6 bg-gray-200 rounded-full relative">
-                  <span class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full"></span>
+                <button onclick="toggleSwitch('weeklyReports')" id="weeklyReports" class="w-11 h-6 bg-gray-200 rounded-full relative transition-colors">
+                  <span class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-all"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Security Section -->
+          <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+            <h3 class="font-semibold text-gray-900 mb-4">Security</h3>
+            <div class="space-y-4">
+              <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                <div>
+                  <div class="text-sm font-medium text-gray-900">Password</div>
+                  <div class="text-xs text-gray-500">Last changed 30 days ago</div>
+                </div>
+                <button onclick="openPasswordModal()" class="text-sm text-fuchsia-600 hover:text-fuchsia-700 font-medium">Change</button>
+              </div>
+              <div class="flex items-center justify-between py-3">
+                <div>
+                  <div class="text-sm font-medium text-gray-900">Two-Factor Authentication</div>
+                  <div class="text-xs text-gray-500">Add an extra layer of security</div>
+                </div>
+                <button onclick="toggleSwitch('twoFactor')" id="twoFactor" class="w-11 h-6 bg-gray-200 rounded-full relative transition-colors">
+                  <span class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-all"></span>
                 </button>
               </div>
             </div>
@@ -186,17 +209,439 @@
           <div class="bg-white rounded-xl border border-red-200 p-6">
             <h3 class="font-semibold text-red-600 mb-2">Danger Zone</h3>
             <p class="text-sm text-gray-500 mb-4">Once you delete your account, there is no going back. Please be certain.</p>
-            <button class="px-4 py-2 text-sm font-medium text-red-600 border border-red-200 rounded-lg hover:bg-red-50">Delete Account</button>
+            <button onclick="openDeleteModal()" class="px-4 py-2 text-sm font-medium text-red-600 border border-red-200 rounded-lg hover:bg-red-50">Delete Account</button>
           </div>
 
           <!-- Save Button -->
           <div class="mt-6 flex justify-end gap-3">
-            <button class="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-200 rounded-lg hover:bg-gray-50">Cancel</button>
-            <button class="px-6 py-2 text-sm font-medium text-white bg-fuchsia-600 rounded-lg hover:bg-fuchsia-700">Save Changes</button>
+            <button onclick="cancelChanges()" class="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-200 rounded-lg hover:bg-gray-50">Cancel</button>
+            <button onclick="saveChanges()" class="px-6 py-2 text-sm font-medium text-white bg-fuchsia-600 rounded-lg hover:bg-fuchsia-700">Save Changes</button>
           </div>
         </div>
       </div>
     </main>
   </div>
+
+  <!-- Change Photo Modal -->
+  <div id="photoModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl max-w-md w-full">
+      <div class="p-6 border-b border-gray-100 flex items-center justify-between">
+        <h3 class="text-lg font-semibold text-gray-900">Change Profile Photo</h3>
+        <button onclick="closePhotoModal()" class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+      </div>
+      <div class="p-6">
+        <div class="border-2 border-dashed border-gray-200 rounded-lg p-8 text-center mb-4">
+          <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          </div>
+          <p class="text-sm text-gray-600 mb-2">Drag and drop your photo here, or</p>
+          <button onclick="simulateUpload()" class="text-sm font-medium text-fuchsia-600 hover:text-fuchsia-700">browse to upload</button>
+        </div>
+        <div class="flex gap-3">
+          <button onclick="closePhotoModal()" class="flex-1 px-4 py-2.5 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50">Cancel</button>
+          <button onclick="uploadPhoto()" class="flex-1 px-4 py-2.5 bg-fuchsia-600 text-white rounded-lg text-sm font-medium hover:bg-fuchsia-700">Upload</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Change Plan Modal -->
+  <div id="planModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl max-w-2xl w-full">
+      <div class="p-6 border-b border-gray-100 flex items-center justify-between">
+        <h3 class="text-lg font-semibold text-gray-900">Change Plan</h3>
+        <button onclick="closePlanModal()" class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+      </div>
+      <div class="p-6">
+        <div class="grid grid-cols-3 gap-4 mb-6">
+          <div onclick="selectPlan('starter')" id="plan-starter" class="border border-gray-200 rounded-xl p-4 cursor-pointer hover:border-fuchsia-300 transition">
+            <div class="text-lg font-semibold text-gray-900 mb-1">Starter</div>
+            <div class="text-2xl font-bold text-gray-900 mb-2">$97<span class="text-sm font-normal text-gray-500">/mo</span></div>
+            <ul class="text-sm text-gray-600 space-y-1">
+              <li>1,000 contacts</li>
+              <li>Basic CRM</li>
+              <li>Email campaigns</li>
+            </ul>
+          </div>
+          <div onclick="selectPlan('professional')" id="plan-professional" class="border-2 border-fuchsia-500 rounded-xl p-4 cursor-pointer bg-fuchsia-50 relative">
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-2 py-0.5 bg-fuchsia-600 text-white text-xs font-medium rounded-full">Current</div>
+            <div class="text-lg font-semibold text-gray-900 mb-1">Professional</div>
+            <div class="text-2xl font-bold text-gray-900 mb-2">$297<span class="text-sm font-normal text-gray-500">/mo</span></div>
+            <ul class="text-sm text-gray-600 space-y-1">
+              <li>10,000 contacts</li>
+              <li>Full CRM + Automations</li>
+              <li>Website builder</li>
+            </ul>
+          </div>
+          <div onclick="selectPlan('enterprise')" id="plan-enterprise" class="border border-gray-200 rounded-xl p-4 cursor-pointer hover:border-fuchsia-300 transition">
+            <div class="text-lg font-semibold text-gray-900 mb-1">Enterprise</div>
+            <div class="text-2xl font-bold text-gray-900 mb-2">$497<span class="text-sm font-normal text-gray-500">/mo</span></div>
+            <ul class="text-sm text-gray-600 space-y-1">
+              <li>Unlimited contacts</li>
+              <li>White-label</li>
+              <li>Priority support</li>
+            </ul>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <button onclick="closePlanModal()" class="flex-1 px-4 py-2.5 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50">Cancel</button>
+          <button onclick="changePlan()" class="flex-1 px-4 py-2.5 bg-fuchsia-600 text-white rounded-lg text-sm font-medium hover:bg-fuchsia-700">Confirm Change</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Update Payment Modal -->
+  <div id="paymentModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl max-w-md w-full">
+      <div class="p-6 border-b border-gray-100 flex items-center justify-between">
+        <h3 class="text-lg font-semibold text-gray-900">Update Payment Method</h3>
+        <button onclick="closePaymentModal()" class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+      </div>
+      <div class="p-6">
+        <div class="space-y-4 mb-6">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1.5">Card Number</label>
+            <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500 outline-none">
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1.5">Expiry Date</label>
+              <input type="text" id="cardExpiry" placeholder="MM/YY" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500 outline-none">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1.5">CVC</label>
+              <input type="text" id="cardCvc" placeholder="123" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500 outline-none">
+            </div>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <button onclick="closePaymentModal()" class="flex-1 px-4 py-2.5 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50">Cancel</button>
+          <button onclick="updatePayment()" class="flex-1 px-4 py-2.5 bg-fuchsia-600 text-white rounded-lg text-sm font-medium hover:bg-fuchsia-700">Update Card</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Change Password Modal -->
+  <div id="passwordModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl max-w-md w-full">
+      <div class="p-6 border-b border-gray-100 flex items-center justify-between">
+        <h3 class="text-lg font-semibold text-gray-900">Change Password</h3>
+        <button onclick="closePasswordModal()" class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+      </div>
+      <div class="p-6">
+        <div class="space-y-4 mb-6">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1.5">Current Password</label>
+            <input type="password" id="currentPassword" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500 outline-none">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1.5">New Password</label>
+            <input type="password" id="newPassword" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500 outline-none">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1.5">Confirm New Password</label>
+            <input type="password" id="confirmPassword" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500 outline-none">
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <button onclick="closePasswordModal()" class="flex-1 px-4 py-2.5 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50">Cancel</button>
+          <button onclick="changePassword()" class="flex-1 px-4 py-2.5 bg-fuchsia-600 text-white rounded-lg text-sm font-medium hover:bg-fuchsia-700">Update Password</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Account Modal -->
+  <div id="deleteModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl max-w-md w-full">
+      <div class="p-6 border-b border-gray-100 flex items-center justify-between">
+        <h3 class="text-lg font-semibold text-red-600">Delete Account</h3>
+        <button onclick="closeDeleteModal()" class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+      </div>
+      <div class="p-6">
+        <div class="flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mx-auto mb-4">
+          <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+        </div>
+        <h4 class="text-lg font-semibold text-gray-900 text-center mb-2">Are you sure?</h4>
+        <p class="text-sm text-gray-500 text-center mb-6">This action cannot be undone. All your data, including contacts, campaigns, and settings will be permanently deleted.</p>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1.5">Type "DELETE" to confirm</label>
+          <input type="text" id="deleteConfirm" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none mb-4">
+        </div>
+        <div class="flex gap-3">
+          <button onclick="closeDeleteModal()" class="flex-1 px-4 py-2.5 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50">Cancel</button>
+          <button onclick="deleteAccount()" class="flex-1 px-4 py-2.5 bg-red-600 text-white rounded-lg text-sm font-medium hover:bg-red-700">Delete Account</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="hidden fixed bottom-4 right-4 px-4 py-3 rounded-lg shadow-lg z-50 flex items-center gap-2"></div>
+
+  <script>
+    // Settings state
+    let settings = {
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'john@acmecorp.com',
+      phone: '(555) 123-4567',
+      companyName: 'Acme Corp',
+      website: 'https://acmecorp.com',
+      industry: 'Marketing Agency',
+      plan: 'professional',
+      notifications: {
+        email: true,
+        sms: true,
+        weekly: false
+      },
+      twoFactor: false
+    };
+
+    let selectedPlan = 'professional';
+
+    // Toggle switches
+    function toggleSwitch(id) {
+      const btn = document.getElementById(id);
+      const span = btn.querySelector('span');
+      const isOn = btn.classList.contains('bg-fuchsia-600');
+
+      if (isOn) {
+        btn.classList.remove('bg-fuchsia-600');
+        btn.classList.add('bg-gray-200');
+        span.classList.remove('right-1');
+        span.classList.add('left-1');
+      } else {
+        btn.classList.remove('bg-gray-200');
+        btn.classList.add('bg-fuchsia-600');
+        span.classList.remove('left-1');
+        span.classList.add('right-1');
+      }
+
+      // Update settings
+      if (id === 'emailNotif') settings.notifications.email = !isOn;
+      if (id === 'smsNotif') settings.notifications.sms = !isOn;
+      if (id === 'weeklyReports') settings.notifications.weekly = !isOn;
+      if (id === 'twoFactor') {
+        settings.twoFactor = !isOn;
+        showToast(settings.twoFactor ? 'Two-factor authentication enabled' : 'Two-factor authentication disabled', 'success');
+      }
+    }
+
+    // Save changes
+    function saveChanges() {
+      const firstName = document.getElementById('firstName').value.trim();
+      const lastName = document.getElementById('lastName').value.trim();
+      const email = document.getElementById('email').value.trim();
+
+      if (!firstName || !lastName) {
+        showToast('Please enter your first and last name', 'error');
+        return;
+      }
+
+      if (!email || !email.includes('@')) {
+        showToast('Please enter a valid email address', 'error');
+        return;
+      }
+
+      settings.firstName = firstName;
+      settings.lastName = lastName;
+      settings.email = email;
+      settings.phone = document.getElementById('phone').value;
+      settings.companyName = document.getElementById('companyName').value;
+      settings.website = document.getElementById('website').value;
+      settings.industry = document.getElementById('industry').value;
+
+      // Update sidebar
+      const initials = firstName[0] + lastName[0];
+      document.getElementById('sidebarAvatar').textContent = initials;
+      document.getElementById('profileAvatar').textContent = initials;
+      document.getElementById('sidebarName').textContent = `${firstName} ${lastName}`;
+      document.getElementById('sidebarEmail').textContent = email;
+
+      showToast('Settings saved successfully', 'success');
+    }
+
+    function cancelChanges() {
+      document.getElementById('firstName').value = settings.firstName;
+      document.getElementById('lastName').value = settings.lastName;
+      document.getElementById('email').value = settings.email;
+      document.getElementById('phone').value = settings.phone;
+      document.getElementById('companyName').value = settings.companyName;
+      document.getElementById('website').value = settings.website;
+      showToast('Changes cancelled', 'success');
+    }
+
+    // Photo Modal
+    function openPhotoModal() {
+      document.getElementById('photoModal').classList.remove('hidden');
+    }
+
+    function closePhotoModal() {
+      document.getElementById('photoModal').classList.add('hidden');
+    }
+
+    function simulateUpload() {
+      showToast('File browser would open here', 'success');
+    }
+
+    function uploadPhoto() {
+      closePhotoModal();
+      showToast('Profile photo updated', 'success');
+    }
+
+    // Plan Modal
+    function openPlanModal() {
+      document.getElementById('planModal').classList.remove('hidden');
+    }
+
+    function closePlanModal() {
+      document.getElementById('planModal').classList.add('hidden');
+    }
+
+    function selectPlan(plan) {
+      selectedPlan = plan;
+      ['starter', 'professional', 'enterprise'].forEach(p => {
+        const el = document.getElementById(`plan-${p}`);
+        if (p === plan) {
+          el.classList.remove('border-gray-200');
+          el.classList.add('border-2', 'border-fuchsia-500', 'bg-fuchsia-50');
+        } else {
+          el.classList.remove('border-2', 'border-fuchsia-500', 'bg-fuchsia-50');
+          el.classList.add('border', 'border-gray-200');
+        }
+      });
+    }
+
+    function changePlan() {
+      const plans = {
+        starter: { name: 'Starter Plan', price: '$97/month' },
+        professional: { name: 'Professional Plan', price: '$297/month' },
+        enterprise: { name: 'Enterprise Plan', price: '$497/month' }
+      };
+
+      settings.plan = selectedPlan;
+      document.getElementById('planBadge').textContent = plans[selectedPlan].name;
+      document.getElementById('planPrice').textContent = plans[selectedPlan].price;
+
+      closePlanModal();
+      showToast(`Plan changed to ${plans[selectedPlan].name}`, 'success');
+    }
+
+    // Payment Modal
+    function openPaymentModal() {
+      document.getElementById('paymentModal').classList.remove('hidden');
+    }
+
+    function closePaymentModal() {
+      document.getElementById('paymentModal').classList.add('hidden');
+    }
+
+    function updatePayment() {
+      const cardNumber = document.getElementById('cardNumber').value.trim();
+      const expiry = document.getElementById('cardExpiry').value.trim();
+      const cvc = document.getElementById('cardCvc').value.trim();
+
+      if (!cardNumber || cardNumber.length < 16) {
+        showToast('Please enter a valid card number', 'error');
+        return;
+      }
+
+      const last4 = cardNumber.slice(-4);
+      document.getElementById('cardInfo').textContent = `Card ending in ${last4}`;
+
+      closePaymentModal();
+      document.getElementById('cardNumber').value = '';
+      document.getElementById('cardExpiry').value = '';
+      document.getElementById('cardCvc').value = '';
+      showToast('Payment method updated', 'success');
+    }
+
+    // Password Modal
+    function openPasswordModal() {
+      document.getElementById('passwordModal').classList.remove('hidden');
+    }
+
+    function closePasswordModal() {
+      document.getElementById('passwordModal').classList.add('hidden');
+    }
+
+    function changePassword() {
+      const current = document.getElementById('currentPassword').value;
+      const newPwd = document.getElementById('newPassword').value;
+      const confirm = document.getElementById('confirmPassword').value;
+
+      if (!current) {
+        showToast('Please enter your current password', 'error');
+        return;
+      }
+
+      if (newPwd.length < 8) {
+        showToast('Password must be at least 8 characters', 'error');
+        return;
+      }
+
+      if (newPwd !== confirm) {
+        showToast('Passwords do not match', 'error');
+        return;
+      }
+
+      closePasswordModal();
+      document.getElementById('currentPassword').value = '';
+      document.getElementById('newPassword').value = '';
+      document.getElementById('confirmPassword').value = '';
+      showToast('Password changed successfully', 'success');
+    }
+
+    // Delete Modal
+    function openDeleteModal() {
+      document.getElementById('deleteModal').classList.remove('hidden');
+    }
+
+    function closeDeleteModal() {
+      document.getElementById('deleteModal').classList.add('hidden');
+      document.getElementById('deleteConfirm').value = '';
+    }
+
+    function deleteAccount() {
+      const confirm = document.getElementById('deleteConfirm').value;
+      if (confirm !== 'DELETE') {
+        showToast('Please type DELETE to confirm', 'error');
+        return;
+      }
+
+      closeDeleteModal();
+      showToast('Account deletion initiated. You will receive a confirmation email.', 'success');
+    }
+
+    // Toast
+    function showToast(message, type = 'success') {
+      const toast = document.getElementById('toast');
+      toast.className = `fixed bottom-4 right-4 px-4 py-3 rounded-lg shadow-lg z-50 flex items-center gap-2 ${type === 'success' ? 'bg-green-600 text-white' : 'bg-red-600 text-white'}`;
+      toast.innerHTML = `
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          ${type === 'success'
+            ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>'
+            : '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>'}
+        </svg>
+        <span>${message}</span>
+      `;
+      toast.classList.remove('hidden');
+      setTimeout(() => toast.classList.add('hidden'), 3000);
+    }
+
+    // Close modals on escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closePhotoModal();
+        closePlanModal();
+        closePaymentModal();
+        closePasswordModal();
+        closeDeleteModal();
+      }
+    });
+  </script>
 </body>
 </html>

@@ -70,7 +70,8 @@
             <p class="text-sm text-gray-500">Create and manage automated workflows</p>
           </div>
           <div class="flex items-center gap-3">
-            <button class="flex items-center gap-2 px-4 py-2 bg-fuchsia-600 text-white rounded-lg text-sm font-medium hover:bg-fuchsia-700 transition">
+            <input type="text" id="searchInput" placeholder="Search workflows..." class="px-4 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500 outline-none">
+            <button id="newWorkflowBtn" class="flex items-center gap-2 px-4 py-2 bg-fuchsia-600 text-white rounded-lg text-sm font-medium hover:bg-fuchsia-700 transition">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
               New Workflow
             </button>
@@ -83,7 +84,7 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
           <div class="bg-white rounded-xl border border-gray-200 p-5">
             <div class="text-sm text-gray-500 mb-1">Active Workflows</div>
-            <div class="text-2xl font-semibold text-gray-900">12</div>
+            <div id="activeCount" class="text-2xl font-semibold text-gray-900">3</div>
           </div>
           <div class="bg-white rounded-xl border border-gray-200 p-5">
             <div class="text-sm text-gray-500 mb-1">Actions This Month</div>
@@ -102,139 +103,234 @@
         <!-- Workflows List -->
         <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
           <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
-            <h3 class="font-semibold text-gray-900">Active Workflows</h3>
-            <div class="flex items-center gap-2">
-              <select class="px-3 py-2 border border-gray-200 rounded-lg text-sm text-gray-600 focus:ring-2 focus:ring-fuchsia-500 outline-none">
-                <option>All Workflows</option>
-                <option>Email</option>
-                <option>SMS</option>
-                <option>Multi-channel</option>
-              </select>
-            </div>
+            <h3 class="font-semibold text-gray-900">Workflows</h3>
+            <select id="filterSelect" class="px-3 py-2 border border-gray-200 rounded-lg text-sm text-gray-600 focus:ring-2 focus:ring-fuchsia-500 outline-none">
+              <option value="all">All Workflows</option>
+              <option value="active">Active Only</option>
+              <option value="paused">Paused Only</option>
+            </select>
           </div>
 
-          <div class="divide-y divide-gray-100">
-            <!-- Workflow 1 -->
-            <div class="p-6 hover:bg-gray-50">
-              <div class="flex items-start justify-between">
-                <div class="flex items-start gap-4">
-                  <div class="w-12 h-12 bg-fuchsia-100 rounded-xl flex items-center justify-center">
-                    <svg class="w-6 h-6 text-fuchsia-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg>
-                  </div>
-                  <div>
-                    <h4 class="font-semibold text-gray-900 mb-1">New Lead Welcome Sequence</h4>
-                    <p class="text-sm text-gray-500 mb-2">Automatically send welcome email and SMS when a new lead is added</p>
-                    <div class="flex items-center gap-4 text-xs text-gray-500">
-                      <span class="flex items-center gap-1"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg> 3 steps</span>
-                      <span class="flex items-center gap-1"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Runs immediately</span>
-                      <span class="flex items-center gap-1"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> 1,234 triggered</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="flex items-center gap-3">
-                  <span class="px-2.5 py-1 text-xs font-medium text-green-700 bg-green-50 rounded-full">Active</span>
-                  <button class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg></button>
-                </div>
-              </div>
-              <!-- Workflow Visual -->
-              <div class="mt-4 flex items-center gap-2 pl-16">
-                <div class="flex items-center gap-2 px-3 py-1.5 bg-fuchsia-50 text-fuchsia-700 rounded-lg text-xs font-medium">
-                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg>
-                  New Lead
-                </div>
-                <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                <div class="flex items-center gap-2 px-3 py-1.5 bg-blue-50 text-blue-700 rounded-lg text-xs font-medium">
-                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                  Send Email
-                </div>
-                <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                <div class="flex items-center gap-2 px-3 py-1.5 bg-orange-50 text-orange-700 rounded-lg text-xs font-medium">
-                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                  Wait 1 day
-                </div>
-                <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                <div class="flex items-center gap-2 px-3 py-1.5 bg-green-50 text-green-700 rounded-lg text-xs font-medium">
-                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
-                  Send SMS
-                </div>
-              </div>
-            </div>
-
-            <!-- Workflow 2 -->
-            <div class="p-6 hover:bg-gray-50">
-              <div class="flex items-start justify-between">
-                <div class="flex items-start gap-4">
-                  <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                  </div>
-                  <div>
-                    <h4 class="font-semibold text-gray-900 mb-1">Appointment Reminder</h4>
-                    <p class="text-sm text-gray-500 mb-2">Send SMS reminder 24 hours before scheduled appointment</p>
-                    <div class="flex items-center gap-4 text-xs text-gray-500">
-                      <span class="flex items-center gap-1"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg> 2 steps</span>
-                      <span class="flex items-center gap-1"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> 24h before</span>
-                      <span class="flex items-center gap-1"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> 856 triggered</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="flex items-center gap-3">
-                  <span class="px-2.5 py-1 text-xs font-medium text-green-700 bg-green-50 rounded-full">Active</span>
-                  <button class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg></button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Workflow 3 -->
-            <div class="p-6 hover:bg-gray-50">
-              <div class="flex items-start justify-between">
-                <div class="flex items-start gap-4">
-                  <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-                    <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                  </div>
-                  <div>
-                    <h4 class="font-semibold text-gray-900 mb-1">Deal Closed - Thank You</h4>
-                    <p class="text-sm text-gray-500 mb-2">Send thank you email when deal is marked as won</p>
-                    <div class="flex items-center gap-4 text-xs text-gray-500">
-                      <span class="flex items-center gap-1"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg> 4 steps</span>
-                      <span class="flex items-center gap-1"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Runs immediately</span>
-                      <span class="flex items-center gap-1"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> 234 triggered</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="flex items-center gap-3">
-                  <span class="px-2.5 py-1 text-xs font-medium text-green-700 bg-green-50 rounded-full">Active</span>
-                  <button class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg></button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Workflow 4 -->
-            <div class="p-6 hover:bg-gray-50">
-              <div class="flex items-start justify-between">
-                <div class="flex items-start gap-4">
-                  <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
-                    <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
-                  </div>
-                  <div>
-                    <h4 class="font-semibold text-gray-900 mb-1">Review Request</h4>
-                    <p class="text-sm text-gray-500 mb-2">Request a review 7 days after service completion</p>
-                    <div class="flex items-center gap-4 text-xs text-gray-500">
-                      <span class="flex items-center gap-1"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg> 3 steps</span>
-                      <span class="flex items-center gap-1"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> 7 days after</span>
-                      <span class="flex items-center gap-1"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> 567 triggered</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="flex items-center gap-3">
-                  <span class="px-2.5 py-1 text-xs font-medium text-gray-600 bg-gray-100 rounded-full">Paused</span>
-                  <button class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg></button>
-                </div>
-              </div>
-            </div>
+          <div id="workflowsList" class="divide-y divide-gray-100">
+            <!-- Workflows will be populated by JavaScript -->
           </div>
         </div>
       </div>
     </main>
   </div>
+
+  <!-- Workflow Modal -->
+  <div id="workflowModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-xl shadow-2xl w-full max-w-md mx-4">
+      <div class="flex items-center justify-between p-6 border-b border-gray-100">
+        <h3 id="modalTitle" class="text-lg font-semibold text-gray-900">Create Workflow</h3>
+        <button id="closeModal" class="p-1 text-gray-400 hover:text-gray-600 rounded-lg">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <form id="workflowForm" class="p-6 space-y-4">
+        <input type="hidden" id="workflowId">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1.5">Workflow Name</label>
+          <input type="text" id="workflowName" required class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500 outline-none" placeholder="e.g., Welcome Sequence">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1.5">Description</label>
+          <textarea id="workflowDesc" rows="3" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500 outline-none" placeholder="Brief description"></textarea>
+        </div>
+        <div class="flex gap-3 pt-4">
+          <button type="button" id="cancelBtn" class="flex-1 px-4 py-2 text-sm font-medium text-gray-700 border border-gray-200 rounded-lg hover:bg-gray-50">Cancel</button>
+          <button type="submit" class="flex-1 px-6 py-2 text-sm font-medium text-white bg-fuchsia-600 rounded-lg hover:bg-fuchsia-700">Create</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="hidden fixed bottom-4 right-4 bg-gray-900 text-white px-6 py-3 rounded-lg shadow-lg z-50">
+    <p id="toastMessage"></p>
+  </div>
+
+  <script>
+    let workflows = [
+      { id: 1, name: 'New Lead Welcome Sequence', description: 'Automatically send welcome email and SMS when a new lead is added', status: 'active', color: 'fuchsia', steps: 3, triggered: 1234 },
+      { id: 2, name: 'Appointment Reminder', description: 'Send SMS reminder 24 hours before scheduled appointment', status: 'active', color: 'blue', steps: 2, triggered: 856 },
+      { id: 3, name: 'Deal Closed - Thank You', description: 'Send thank you email when deal is marked as won', status: 'active', color: 'green', steps: 4, triggered: 234 },
+      { id: 4, name: 'Review Request', description: 'Request a review 7 days after service completion', status: 'paused', color: 'orange', steps: 3, triggered: 567 }
+    ];
+    let nextId = 5;
+    let searchTerm = '';
+    let filterStatus = 'all';
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toastMessage').textContent = message;
+      toast.classList.remove('hidden');
+      setTimeout(() => toast.classList.add('hidden'), 3000);
+    }
+
+    function updateStats() {
+      const activeCount = workflows.filter(w => w.status === 'active').length;
+      document.getElementById('activeCount').textContent = activeCount;
+    }
+
+    function renderWorkflows() {
+      const container = document.getElementById('workflowsList');
+      const filtered = workflows.filter(w => {
+        const matchesSearch = w.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                            w.description.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesFilter = filterStatus === 'all' || w.status === filterStatus;
+        return matchesSearch && matchesFilter;
+      });
+
+      container.innerHTML = filtered.map(workflow => {
+        const colors = {
+          fuchsia: { bg: 'bg-fuchsia-100', text: 'text-fuchsia-600' },
+          blue: { bg: 'bg-blue-100', text: 'text-blue-600' },
+          green: { bg: 'bg-green-100', text: 'text-green-600' },
+          orange: { bg: 'bg-orange-100', text: 'text-orange-600' }
+        };
+        const color = colors[workflow.color];
+
+        return `
+          <div class="p-6 hover:bg-gray-50">
+            <div class="flex items-start justify-between">
+              <div class="flex items-start gap-4 flex-1">
+                <div class="w-12 h-12 ${color.bg} rounded-xl flex items-center justify-center">
+                  <svg class="w-6 h-6 ${color.text}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                  </svg>
+                </div>
+                <div class="flex-1">
+                  <h4 class="font-semibold text-gray-900 mb-1">${workflow.name}</h4>
+                  <p class="text-sm text-gray-500 mb-2">${workflow.description}</p>
+                  <div class="flex items-center gap-4 text-xs text-gray-500">
+                    <span class="flex items-center gap-1">
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                      </svg> ${workflow.steps} steps
+                    </span>
+                    <span class="flex items-center gap-1">
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                      </svg> ${workflow.triggered} triggered
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="px-2.5 py-1 text-xs font-medium ${workflow.status === 'active' ? 'text-green-700 bg-green-50' : 'text-gray-600 bg-gray-100'} rounded-full">
+                  ${workflow.status === 'active' ? 'Active' : 'Paused'}
+                </span>
+                <button onclick="toggleStatus(${workflow.id})" class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg" title="${workflow.status === 'active' ? 'Pause' : 'Activate'}">
+                  ${workflow.status === 'active'
+                    ? '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>'
+                    : '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>'
+                  }
+                </button>
+                <button onclick="editWorkflow(${workflow.id})" class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                  </svg>
+                </button>
+                <button onclick="deleteWorkflow(${workflow.id})" class="p-2 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      updateStats();
+    }
+
+    function toggleStatus(id) {
+      const workflow = workflows.find(w => w.id === id);
+      if (workflow) {
+        workflow.status = workflow.status === 'active' ? 'paused' : 'active';
+        showToast(`Workflow ${workflow.status === 'active' ? 'activated' : 'paused'}`);
+        renderWorkflows();
+      }
+    }
+
+    function editWorkflow(id) {
+      const workflow = workflows.find(w => w.id === id);
+      if (!workflow) return;
+
+      document.getElementById('modalTitle').textContent = 'Edit Workflow';
+      document.getElementById('workflowId').value = id;
+      document.getElementById('workflowName').value = workflow.name;
+      document.getElementById('workflowDesc').value = workflow.description;
+      document.getElementById('workflowModal').classList.remove('hidden');
+    }
+
+    function deleteWorkflow(id) {
+      if (confirm('Are you sure you want to delete this workflow?')) {
+        workflows = workflows.filter(w => w.id !== id);
+        renderWorkflows();
+        showToast('Workflow deleted successfully');
+      }
+    }
+
+    document.getElementById('newWorkflowBtn').addEventListener('click', () => {
+      document.getElementById('modalTitle').textContent = 'Create Workflow';
+      document.getElementById('workflowId').value = '';
+      document.getElementById('workflowName').value = '';
+      document.getElementById('workflowDesc').value = '';
+      document.getElementById('workflowModal').classList.remove('hidden');
+    });
+
+    document.getElementById('workflowForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const id = document.getElementById('workflowId').value;
+      const data = {
+        name: document.getElementById('workflowName').value,
+        description: document.getElementById('workflowDesc').value,
+      };
+
+      if (id) {
+        const workflow = workflows.find(w => w.id === parseInt(id));
+        Object.assign(workflow, data);
+        showToast('Workflow updated successfully');
+      } else {
+        const colors = ['fuchsia', 'blue', 'green', 'orange'];
+        workflows.push({
+          id: nextId++,
+          ...data,
+          status: 'paused',
+          color: colors[Math.floor(Math.random() * colors.length)],
+          steps: 1,
+          triggered: 0
+        });
+        showToast('Workflow created successfully');
+      }
+
+      document.getElementById('workflowModal').classList.add('hidden');
+      renderWorkflows();
+    });
+
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      searchTerm = e.target.value;
+      renderWorkflows();
+    });
+
+    document.getElementById('filterSelect').addEventListener('change', (e) => {
+      filterStatus = e.target.value;
+      renderWorkflows();
+    });
+
+    document.getElementById('closeModal').addEventListener('click', () => {
+      document.getElementById('workflowModal').classList.add('hidden');
+    });
+
+    document.getElementById('cancelBtn').addEventListener('click', () => {
+      document.getElementById('workflowModal').classList.add('hidden');
+    });
+
+    renderWorkflows();
+  </script>
 </body>
 </html>

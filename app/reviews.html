@@ -70,7 +70,11 @@
             <p class="text-sm text-gray-500">Manage and respond to customer reviews</p>
           </div>
           <div class="flex items-center gap-3">
-            <button class="flex items-center gap-2 px-4 py-2 bg-fuchsia-600 text-white rounded-lg text-sm font-medium hover:bg-fuchsia-700 transition">
+            <div class="relative">
+              <input type="text" id="searchInput" placeholder="Search reviews..." oninput="filterReviews()" class="w-64 px-4 py-2 pl-10 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500 outline-none">
+              <svg class="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            </div>
+            <button onclick="openRequestModal()" class="flex items-center gap-2 px-4 py-2 bg-fuchsia-600 text-white rounded-lg text-sm font-medium hover:bg-fuchsia-700 transition">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
               Request Reviews
             </button>
@@ -80,128 +84,421 @@
 
       <div class="p-6">
         <!-- Stats -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-          <div class="bg-white rounded-xl border border-gray-200 p-5">
-            <div class="flex items-center gap-3">
-              <div class="flex gap-0.5">
-                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-              </div>
-              <div>
-                <div class="text-2xl font-semibold text-gray-900">4.9</div>
-                <div class="text-xs text-gray-500">Average Rating</div>
-              </div>
-            </div>
-          </div>
-          <div class="bg-white rounded-xl border border-gray-200 p-5">
-            <div class="text-sm text-gray-500 mb-1">Total Reviews</div>
-            <div class="text-2xl font-semibold text-gray-900">156</div>
-          </div>
-          <div class="bg-white rounded-xl border border-gray-200 p-5">
-            <div class="text-sm text-gray-500 mb-1">This Month</div>
-            <div class="text-2xl font-semibold text-gray-900">24</div>
-          </div>
-          <div class="bg-white rounded-xl border border-gray-200 p-5">
-            <div class="text-sm text-gray-500 mb-1">Response Rate</div>
-            <div class="text-2xl font-semibold text-gray-900">92%</div>
-          </div>
-        </div>
+        <div id="statsContainer" class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6"></div>
 
         <!-- Reviews List -->
         <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
           <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
             <div class="flex items-center gap-4">
               <h3 class="font-semibold text-gray-900">Recent Reviews</h3>
-              <div class="flex bg-gray-100 rounded-lg p-1">
-                <button class="px-3 py-1.5 text-sm font-medium bg-white text-gray-900 rounded-md shadow-sm">All</button>
-                <button class="px-3 py-1.5 text-sm font-medium text-gray-600 hover:text-gray-900">Pending</button>
-                <button class="px-3 py-1.5 text-sm font-medium text-gray-600 hover:text-gray-900">Responded</button>
-              </div>
+              <div id="filterTabs" class="flex bg-gray-100 rounded-lg p-1"></div>
+            </div>
+            <div class="flex items-center gap-2">
+              <select id="ratingFilter" onchange="filterReviews()" class="px-3 py-1.5 border border-gray-200 rounded-lg text-sm text-gray-600">
+                <option value="all">All Ratings</option>
+                <option value="5">5 Stars</option>
+                <option value="4">4 Stars</option>
+                <option value="3">3 Stars</option>
+                <option value="2">2 Stars</option>
+                <option value="1">1 Star</option>
+              </select>
             </div>
           </div>
-
-          <div class="divide-y divide-gray-100">
-            <!-- Review 1 -->
-            <div class="p-6">
-              <div class="flex items-start justify-between mb-3">
-                <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600 font-medium">SM</div>
-                  <div>
-                    <div class="font-medium text-gray-900">Sarah Mitchell</div>
-                    <div class="text-sm text-gray-500">Google Review - 2 days ago</div>
-                  </div>
-                </div>
-                <div class="flex gap-0.5">
-                  <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                  <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                  <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                  <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                  <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                </div>
-              </div>
-              <p class="text-gray-600 text-sm mb-4">"Awesome Software replaced 6 different tools for us. Our team efficiency has increased by 300% and our clients love the white-label dashboard. Highly recommend!"</p>
-              <div class="flex items-center gap-3">
-                <span class="px-2.5 py-1 text-xs font-medium text-green-700 bg-green-50 rounded-full">Responded</span>
-                <button class="text-sm text-fuchsia-600 hover:text-fuchsia-700 font-medium">View Response</button>
-              </div>
-            </div>
-
-            <!-- Review 2 -->
-            <div class="p-6">
-              <div class="flex items-start justify-between mb-3">
-                <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-medium">MJ</div>
-                  <div>
-                    <div class="font-medium text-gray-900">Marcus Johnson</div>
-                    <div class="text-sm text-gray-500">Google Review - 5 days ago</div>
-                  </div>
-                </div>
-                <div class="flex gap-0.5">
-                  <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                  <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                  <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                  <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                  <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                </div>
-              </div>
-              <p class="text-gray-600 text-sm mb-4">"The automated follow-up sequences have doubled our lead conversion rate. The ROI was visible within the first month. Great support team too!"</p>
-              <div class="flex items-center gap-3">
-                <span class="px-2.5 py-1 text-xs font-medium text-orange-700 bg-orange-50 rounded-full">Pending Response</span>
-                <button class="text-sm text-fuchsia-600 hover:text-fuchsia-700 font-medium">Respond Now</button>
-              </div>
-            </div>
-
-            <!-- Review 3 -->
-            <div class="p-6">
-              <div class="flex items-start justify-between mb-3">
-                <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 font-medium">JP</div>
-                  <div>
-                    <div class="font-medium text-gray-900">Jennifer Park</div>
-                    <div class="text-sm text-gray-500">Facebook Review - 1 week ago</div>
-                  </div>
-                </div>
-                <div class="flex gap-0.5">
-                  <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                  <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                  <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                  <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                  <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                </div>
-              </div>
-              <p class="text-gray-600 text-sm mb-4">"Appointment no-shows dropped by 60% with the automated reminders. We've gotten 50+ new 5-star reviews using their review request feature. Game changer!"</p>
-              <div class="flex items-center gap-3">
-                <span class="px-2.5 py-1 text-xs font-medium text-green-700 bg-green-50 rounded-full">Responded</span>
-                <button class="text-sm text-fuchsia-600 hover:text-fuchsia-700 font-medium">View Response</button>
-              </div>
-            </div>
-          </div>
+          <div id="reviewsList" class="divide-y divide-gray-100"></div>
         </div>
       </div>
     </main>
   </div>
+
+  <!-- Request Reviews Modal -->
+  <div id="requestModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl max-w-lg w-full">
+      <div class="p-6 border-b border-gray-100 flex items-center justify-between">
+        <h3 class="text-lg font-semibold text-gray-900">Request Reviews</h3>
+        <button onclick="closeRequestModal()" class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+      </div>
+      <div class="p-6">
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 mb-1.5">Send Via</label>
+          <div class="flex gap-3">
+            <label class="flex-1 flex items-center justify-center gap-2 p-3 border border-gray-200 rounded-lg cursor-pointer hover:border-fuchsia-300 has-[:checked]:border-fuchsia-500 has-[:checked]:bg-fuchsia-50">
+              <input type="radio" name="sendVia" value="email" checked class="hidden">
+              <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              <span class="text-sm font-medium">Email</span>
+            </label>
+            <label class="flex-1 flex items-center justify-center gap-2 p-3 border border-gray-200 rounded-lg cursor-pointer hover:border-fuchsia-300 has-[:checked]:border-fuchsia-500 has-[:checked]:bg-fuchsia-50">
+              <input type="radio" name="sendVia" value="sms" class="hidden">
+              <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+              <span class="text-sm font-medium">SMS</span>
+            </label>
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 mb-1.5">Select Recipients</label>
+          <select id="recipientSelect" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500 outline-none">
+            <option value="recent">Recent Customers (Last 30 days)</option>
+            <option value="completed">Completed Projects</option>
+            <option value="vip">VIP Customers</option>
+            <option value="all">All Customers</option>
+          </select>
+        </div>
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 mb-1.5">Review Platform</label>
+          <div class="grid grid-cols-3 gap-2">
+            <label class="flex items-center justify-center gap-2 p-3 border border-gray-200 rounded-lg cursor-pointer hover:border-fuchsia-300 has-[:checked]:border-fuchsia-500 has-[:checked]:bg-fuchsia-50">
+              <input type="checkbox" name="platform" value="google" checked class="hidden">
+              <span class="text-sm font-medium">Google</span>
+            </label>
+            <label class="flex items-center justify-center gap-2 p-3 border border-gray-200 rounded-lg cursor-pointer hover:border-fuchsia-300 has-[:checked]:border-fuchsia-500 has-[:checked]:bg-fuchsia-50">
+              <input type="checkbox" name="platform" value="facebook" class="hidden">
+              <span class="text-sm font-medium">Facebook</span>
+            </label>
+            <label class="flex items-center justify-center gap-2 p-3 border border-gray-200 rounded-lg cursor-pointer hover:border-fuchsia-300 has-[:checked]:border-fuchsia-500 has-[:checked]:bg-fuchsia-50">
+              <input type="checkbox" name="platform" value="yelp" class="hidden">
+              <span class="text-sm font-medium">Yelp</span>
+            </label>
+          </div>
+        </div>
+        <div class="mb-6">
+          <label class="block text-sm font-medium text-gray-700 mb-1.5">Personalized Message</label>
+          <textarea id="requestMessage" rows="3" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500 outline-none resize-none" placeholder="Hi [Name], we hope you're enjoying our services...">Hi [Name], thank you for choosing us! We'd love to hear about your experience. Would you mind leaving us a quick review?</textarea>
+        </div>
+        <div class="flex gap-3">
+          <button onclick="closeRequestModal()" class="flex-1 px-4 py-2.5 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50">Cancel</button>
+          <button onclick="sendReviewRequest()" class="flex-1 px-4 py-2.5 bg-fuchsia-600 text-white rounded-lg text-sm font-medium hover:bg-fuchsia-700">Send Request</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Respond Modal -->
+  <div id="respondModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl max-w-lg w-full">
+      <div class="p-6 border-b border-gray-100 flex items-center justify-between">
+        <h3 class="text-lg font-semibold text-gray-900">Respond to Review</h3>
+        <button onclick="closeRespondModal()" class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+      </div>
+      <div class="p-6">
+        <div id="reviewToRespond" class="mb-4 p-4 bg-gray-50 rounded-lg"></div>
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 mb-1.5">Your Response</label>
+          <textarea id="responseText" rows="4" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500 outline-none resize-none" placeholder="Thank you for your feedback..."></textarea>
+        </div>
+        <div class="mb-4">
+          <div class="text-sm text-gray-500 mb-2">Quick Responses:</div>
+          <div class="flex flex-wrap gap-2">
+            <button onclick="insertQuickResponse('thank')" class="px-3 py-1.5 text-xs font-medium text-gray-600 bg-gray-100 rounded-full hover:bg-gray-200">Thank you</button>
+            <button onclick="insertQuickResponse('appreciate')" class="px-3 py-1.5 text-xs font-medium text-gray-600 bg-gray-100 rounded-full hover:bg-gray-200">Appreciate feedback</button>
+            <button onclick="insertQuickResponse('sorry')" class="px-3 py-1.5 text-xs font-medium text-gray-600 bg-gray-100 rounded-full hover:bg-gray-200">Sorry to hear</button>
+            <button onclick="insertQuickResponse('contact')" class="px-3 py-1.5 text-xs font-medium text-gray-600 bg-gray-100 rounded-full hover:bg-gray-200">Contact us</button>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <button onclick="closeRespondModal()" class="flex-1 px-4 py-2.5 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50">Cancel</button>
+          <button onclick="submitResponse()" class="flex-1 px-4 py-2.5 bg-fuchsia-600 text-white rounded-lg text-sm font-medium hover:bg-fuchsia-700">Post Response</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- View Response Modal -->
+  <div id="viewResponseModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl max-w-lg w-full">
+      <div class="p-6 border-b border-gray-100 flex items-center justify-between">
+        <h3 class="text-lg font-semibold text-gray-900">Review Response</h3>
+        <button onclick="closeViewResponseModal()" class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+      </div>
+      <div id="viewResponseContent" class="p-6"></div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="hidden fixed bottom-4 right-4 px-4 py-3 rounded-lg shadow-lg z-50 flex items-center gap-2"></div>
+
+  <script>
+    // Reviews Data
+    let reviews = [
+      { id: 1, name: 'Sarah Mitchell', initials: 'SM', color: 'green', rating: 5, platform: 'Google', date: '2 days ago', text: 'Awesome Software replaced 6 different tools for us. Our team efficiency has increased by 300% and our clients love the white-label dashboard. Highly recommend!', status: 'responded', response: 'Thank you so much, Sarah! We\'re thrilled to hear that Awesome Software has made such a positive impact on your team\'s efficiency. We appreciate your kind words!' },
+      { id: 2, name: 'Marcus Johnson', initials: 'MJ', color: 'blue', rating: 5, platform: 'Google', date: '5 days ago', text: 'The automated follow-up sequences have doubled our lead conversion rate. The ROI was visible within the first month. Great support team too!', status: 'pending', response: null },
+      { id: 3, name: 'Jennifer Park', initials: 'JP', color: 'purple', rating: 5, platform: 'Facebook', date: '1 week ago', text: 'Appointment no-shows dropped by 60% with the automated reminders. We\'ve gotten 50+ new 5-star reviews using their review request feature. Game changer!', status: 'responded', response: 'Jennifer, thank you for the wonderful feedback! We\'re so glad the reminder and review features are working well for your business.' },
+      { id: 4, name: 'David Chen', initials: 'DC', color: 'orange', rating: 4, platform: 'Google', date: '2 weeks ago', text: 'Great platform overall. The website builder is intuitive and the CRM is solid. Would love to see more email template options in the future.', status: 'pending', response: null },
+      { id: 5, name: 'Amanda Rodriguez', initials: 'AR', color: 'pink', rating: 5, platform: 'Yelp', date: '2 weeks ago', text: 'Switched from three different tools to Awesome Software. Everything is now in one place and my team couldn\'t be happier. The onboarding was seamless!', status: 'responded', response: 'Amanda, we\'re so glad the transition was smooth! Thank you for choosing us as your all-in-one solution.' },
+      { id: 6, name: 'Robert Kim', initials: 'RK', color: 'teal', rating: 3, platform: 'Google', date: '3 weeks ago', text: 'Good features but the learning curve is steep. Took us a couple weeks to get everything set up properly. Support was helpful though.', status: 'pending', response: null }
+    ];
+
+    let currentFilter = 'all';
+    let currentReviewId = null;
+
+    const quickResponses = {
+      thank: 'Thank you so much for taking the time to leave this review! ',
+      appreciate: 'We truly appreciate your feedback and kind words. ',
+      sorry: 'We\'re sorry to hear about your experience. ',
+      contact: 'Please feel free to contact us directly at support@awesomesoftware.com if you\'d like to discuss further.'
+    };
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      renderStats();
+      renderFilterTabs();
+      renderReviews();
+    });
+
+    function renderStats() {
+      const totalReviews = reviews.length;
+      const avgRating = (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1);
+      const thisMonth = reviews.filter(r => r.date.includes('days') || r.date.includes('week')).length;
+      const responseRate = Math.round((reviews.filter(r => r.status === 'responded').length / reviews.length) * 100);
+
+      const container = document.getElementById('statsContainer');
+      container.innerHTML = `
+        <div onclick="filterByRating('all')" class="bg-white rounded-xl border border-gray-200 p-5 cursor-pointer hover:border-fuchsia-300 transition">
+          <div class="flex items-center gap-3">
+            <div class="flex gap-0.5">
+              ${renderStars(5, 'w-5 h-5')}
+            </div>
+            <div>
+              <div class="text-2xl font-semibold text-gray-900">${avgRating}</div>
+              <div class="text-xs text-gray-500">Average Rating</div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-200 p-5">
+          <div class="text-sm text-gray-500 mb-1">Total Reviews</div>
+          <div class="text-2xl font-semibold text-gray-900">${totalReviews}</div>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-200 p-5">
+          <div class="text-sm text-gray-500 mb-1">This Month</div>
+          <div class="text-2xl font-semibold text-gray-900">${thisMonth}</div>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-200 p-5">
+          <div class="text-sm text-gray-500 mb-1">Response Rate</div>
+          <div class="text-2xl font-semibold text-gray-900">${responseRate}%</div>
+        </div>
+      `;
+    }
+
+    function renderFilterTabs() {
+      const tabs = [
+        { id: 'all', label: 'All', count: reviews.length },
+        { id: 'pending', label: 'Pending', count: reviews.filter(r => r.status === 'pending').length },
+        { id: 'responded', label: 'Responded', count: reviews.filter(r => r.status === 'responded').length }
+      ];
+
+      document.getElementById('filterTabs').innerHTML = tabs.map(tab => `
+        <button onclick="setFilter('${tab.id}')" class="px-3 py-1.5 text-sm font-medium rounded-md transition ${currentFilter === tab.id ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-600 hover:text-gray-900'}">
+          ${tab.label} (${tab.count})
+        </button>
+      `).join('');
+    }
+
+    function renderStars(count, size = 'w-4 h-4') {
+      return Array(5).fill(0).map((_, i) => `
+        <svg class="${size} ${i < count ? 'text-yellow-400' : 'text-gray-200'}" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+        </svg>
+      `).join('');
+    }
+
+    function renderReviews() {
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+      const ratingFilter = document.getElementById('ratingFilter').value;
+
+      let filtered = reviews.filter(review => {
+        const matchesSearch = review.name.toLowerCase().includes(searchTerm) || review.text.toLowerCase().includes(searchTerm);
+        const matchesStatus = currentFilter === 'all' || review.status === currentFilter;
+        const matchesRating = ratingFilter === 'all' || review.rating === parseInt(ratingFilter);
+        return matchesSearch && matchesStatus && matchesRating;
+      });
+
+      const container = document.getElementById('reviewsList');
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="p-8 text-center">
+            <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+            </div>
+            <div class="text-gray-500">No reviews found</div>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(review => `
+        <div class="p-6 hover:bg-gray-50 transition">
+          <div class="flex items-start justify-between mb-3">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-${review.color}-100 rounded-full flex items-center justify-center text-${review.color}-600 font-medium">${review.initials}</div>
+              <div>
+                <div class="font-medium text-gray-900">${review.name}</div>
+                <div class="text-sm text-gray-500">${review.platform} Review - ${review.date}</div>
+              </div>
+            </div>
+            <div class="flex gap-0.5">${renderStars(review.rating)}</div>
+          </div>
+          <p class="text-gray-600 text-sm mb-4">"${review.text}"</p>
+          <div class="flex items-center gap-3">
+            ${review.status === 'responded'
+              ? `<span class="px-2.5 py-1 text-xs font-medium text-green-700 bg-green-50 rounded-full">Responded</span>
+                 <button onclick="viewResponse(${review.id})" class="text-sm text-fuchsia-600 hover:text-fuchsia-700 font-medium">View Response</button>`
+              : `<span class="px-2.5 py-1 text-xs font-medium text-orange-700 bg-orange-50 rounded-full">Pending Response</span>
+                 <button onclick="openRespondModal(${review.id})" class="text-sm text-fuchsia-600 hover:text-fuchsia-700 font-medium">Respond Now</button>`
+            }
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function setFilter(filter) {
+      currentFilter = filter;
+      renderFilterTabs();
+      renderReviews();
+    }
+
+    function filterReviews() {
+      renderReviews();
+    }
+
+    function filterByRating(rating) {
+      document.getElementById('ratingFilter').value = rating;
+      filterReviews();
+    }
+
+    function openRequestModal() {
+      document.getElementById('requestModal').classList.remove('hidden');
+    }
+
+    function closeRequestModal() {
+      document.getElementById('requestModal').classList.add('hidden');
+    }
+
+    function sendReviewRequest() {
+      const recipient = document.getElementById('recipientSelect');
+      const recipientText = recipient.options[recipient.selectedIndex].text;
+      closeRequestModal();
+      showToast(`Review request sent to ${recipientText}`, 'success');
+    }
+
+    function openRespondModal(reviewId) {
+      currentReviewId = reviewId;
+      const review = reviews.find(r => r.id === reviewId);
+      if (!review) return;
+
+      document.getElementById('reviewToRespond').innerHTML = `
+        <div class="flex items-center gap-2 mb-2">
+          <div class="w-8 h-8 bg-${review.color}-100 rounded-full flex items-center justify-center text-${review.color}-600 text-sm font-medium">${review.initials}</div>
+          <div class="font-medium text-gray-900 text-sm">${review.name}</div>
+          <div class="flex gap-0.5">${renderStars(review.rating, 'w-3 h-3')}</div>
+        </div>
+        <p class="text-gray-600 text-sm">"${review.text}"</p>
+      `;
+      document.getElementById('responseText').value = '';
+      document.getElementById('respondModal').classList.remove('hidden');
+    }
+
+    function closeRespondModal() {
+      document.getElementById('respondModal').classList.add('hidden');
+      currentReviewId = null;
+    }
+
+    function insertQuickResponse(type) {
+      const textarea = document.getElementById('responseText');
+      textarea.value += quickResponses[type];
+      textarea.focus();
+    }
+
+    function submitResponse() {
+      const responseText = document.getElementById('responseText').value.trim();
+      if (!responseText) {
+        showToast('Please enter a response', 'error');
+        return;
+      }
+
+      const review = reviews.find(r => r.id === currentReviewId);
+      if (review) {
+        review.status = 'responded';
+        review.response = responseText;
+      }
+
+      closeRespondModal();
+      renderStats();
+      renderFilterTabs();
+      renderReviews();
+      showToast('Response posted successfully', 'success');
+    }
+
+    function viewResponse(reviewId) {
+      const review = reviews.find(r => r.id === reviewId);
+      if (!review) return;
+
+      document.getElementById('viewResponseContent').innerHTML = `
+        <div class="mb-4 p-4 bg-gray-50 rounded-lg">
+          <div class="flex items-center gap-2 mb-2">
+            <div class="w-8 h-8 bg-${review.color}-100 rounded-full flex items-center justify-center text-${review.color}-600 text-sm font-medium">${review.initials}</div>
+            <div class="font-medium text-gray-900 text-sm">${review.name}</div>
+            <div class="flex gap-0.5">${renderStars(review.rating, 'w-3 h-3')}</div>
+          </div>
+          <p class="text-gray-600 text-sm">"${review.text}"</p>
+        </div>
+        <div class="p-4 bg-fuchsia-50 rounded-lg border-l-4 border-fuchsia-500">
+          <div class="flex items-center gap-2 mb-2">
+            <div class="w-8 h-8 bg-fuchsia-100 rounded-full flex items-center justify-center text-fuchsia-600 text-sm font-medium">JD</div>
+            <div class="font-medium text-gray-900 text-sm">Your Response</div>
+          </div>
+          <p class="text-gray-600 text-sm">${review.response}</p>
+        </div>
+        <div class="mt-4 flex gap-3">
+          <button onclick="editResponse(${review.id})" class="flex-1 px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50">Edit Response</button>
+          <button onclick="closeViewResponseModal()" class="flex-1 px-4 py-2 bg-fuchsia-600 text-white rounded-lg text-sm font-medium hover:bg-fuchsia-700">Close</button>
+        </div>
+      `;
+      document.getElementById('viewResponseModal').classList.remove('hidden');
+    }
+
+    function closeViewResponseModal() {
+      document.getElementById('viewResponseModal').classList.add('hidden');
+    }
+
+    function editResponse(reviewId) {
+      closeViewResponseModal();
+      const review = reviews.find(r => r.id === reviewId);
+      if (!review) return;
+
+      currentReviewId = reviewId;
+      document.getElementById('reviewToRespond').innerHTML = `
+        <div class="flex items-center gap-2 mb-2">
+          <div class="w-8 h-8 bg-${review.color}-100 rounded-full flex items-center justify-center text-${review.color}-600 text-sm font-medium">${review.initials}</div>
+          <div class="font-medium text-gray-900 text-sm">${review.name}</div>
+          <div class="flex gap-0.5">${renderStars(review.rating, 'w-3 h-3')}</div>
+        </div>
+        <p class="text-gray-600 text-sm">"${review.text}"</p>
+      `;
+      document.getElementById('responseText').value = review.response || '';
+      document.getElementById('respondModal').classList.remove('hidden');
+    }
+
+    function showToast(message, type = 'success') {
+      const toast = document.getElementById('toast');
+      toast.className = `fixed bottom-4 right-4 px-4 py-3 rounded-lg shadow-lg z-50 flex items-center gap-2 ${type === 'success' ? 'bg-green-600 text-white' : 'bg-red-600 text-white'}`;
+      toast.innerHTML = `
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          ${type === 'success'
+            ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>'
+            : '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>'}
+        </svg>
+        <span>${message}</span>
+      `;
+      toast.classList.remove('hidden');
+      setTimeout(() => toast.classList.add('hidden'), 3000);
+    }
+
+    // Close modals on escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeRequestModal();
+        closeRespondModal();
+        closeViewResponseModal();
+      }
+    });
+  </script>
 </body>
 </html>
